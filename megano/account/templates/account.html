@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="Middle Middle_top">
+    <div class="Section Section_column Section_columnLeft">
+        <div class="wrap">
+            <div class="Section-column">
+                <div class="Section-columnSection">
+                    <header class="Section-header">
+                        <strong class="Section-title">{% translate 'Навигация' %}
+                        </strong>
+                    </header>
+                    <div class="Section-columnContent">
+                        <div class="NavigateProfile">
+                            <ul class="menu menu_vt">
+                                <li class="menu-item_ACTIVE menu-item">
+                                    <a class="menu-link"
+                                       href="{% url 'account:account' %}">{% translate 'Личный кабинет' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:profile' %}">
+                                        {% translate 'Профиль' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:orders_history' %}">
+                                        {% translate 'История заказов' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:browsing_history' %}">
+                                        {% translate 'История просмотров' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Section-content">
+                <div class="Account">
+                    <div class="Account-group">
+                        <div class="Account-column">
+                            <div class="Account-avatar">
+                                {% if user.profile.avatar %}
+                                <img
+                                        src="{{ user.profile.avatar.url }}"
+                                        alt="card.jpg"/>
+                                {% else %}
+                                <img
+                                        src="{% static 'assets/img/icons/profile.png' %}"
+                                        alt="card.jpg"/>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="Account-column">
+                            <div class="Account-name">
+                                {{ user.username }}
+                            </div>
+                            <a class="Account-editLink"
+                               href="{% url 'account:profile' %}">{% translate 'Редактировать профиль' %}
+                                </a>
+                            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}">
+                                <select name="language">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                    <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}
+                                            selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                    {% endfor %}
+                                </select>
+                                <input type="submit" value="Перевести">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="Account-group">
+                        <div class="Account-column Account-column_full">
+                            {% if last_order %}
+                            <div class="Order Order_anons">
+                                <div class="Order-personal">
+                                    <div class="row">
+                                        <div class="row-block">
+                                            <a class="Order-title"
+                                               href="{% url 'order:order_detail' pk=last_order.pk %}">
+                                                Заказ&#32;
+                                                <span class="Order-numberOrder">{{ last_order.pk }}</span>&#32;от&#32;
+                                                <span class="Order-dateOrder">{{ last_order.created_date|date:"d.m.Y" }}</span>
+                                            </a>
+                                            <div class="Account-editLink">
+                                                <a href="{% url 'account:orders_history' %}">
+                                                    {% translate 'История заказов' %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row-block">
+                                            <div class="Order-info Order-info_delivery">
+                                                <div class="Order-infoType">{% translate 'Тип доставки:' %}</div>
+                                                <div class="Order-infoContent">
+                                                    {{ last_order.get_delivery_method_display }}
+                                                </div>
+                                            </div>
+                                            <div class="Order-info Order-info_pay">
+                                                <div class="Order-infoType">{% translate 'Оплата:'%}
+                                                </div>
+                                                <div class="Order-infoContent">
+                                                    {{ last_order.get_payment_method_display }}
+                                                </div>
+                                            </div>
+                                            <div class="Order-info">
+                                                <div class="Order-infoType">{% translate 'Общая стоимость:' %}</div>
+                                                <div class="Order-infoContent">
+                                                    {{ last_order.price }}₽
+                                                </div>
+                                            </div>
+                                            <div class="Order-info Order-info_status">
+                                                <div class="Order-infoType">{% translate 'Статус:' %}
+                                                </div>
+                                                <div class="Order-infoContent">
+                                                    {% if last_order.pay_result == True %}
+                                                    {% translate 'Оплачен' %}
+                                                    {% else %}
+                                                    {% translate 'Не оплачен' %} ({{last_order.payment_error}})
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Section">
+    <div class="wrap">
+        <h2>{% translate 'История просмотров' %}</h2>
+
+        {% for product in browsing_history %}
+        <div class="Cards Cards_blog">
+            <div class="Card">
+                <a class="Card-picture" href="{% url 'catalog:product_detail' pk=product.pk %}">
+
+                    <img src="{{product.avatar.image.url}}" alt="{{product.avatar.name}}">
+
+                </a>
+
+                <div class="Card-content">
+                    <strong class="Card-title"><a href="{% url 'catalog:product_detail' pk=product.pk %}">
+
+                        {{ product.name }}
+
+                    </a>
+                    </strong>
+                    <div class="Card-description">
+
+                        {{ product.description}}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <h3>{% translate 'Здесь еще нет ни одного товара.' %}</h3>
+        {% endfor %}
+    </div>
+</div>
+</div>
+
+{% endblock %}

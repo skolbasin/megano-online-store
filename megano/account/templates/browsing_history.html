@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="Middle Middle_top">
+    <div class="Section Section_column Section_columnLeft">
+        <div class="wrap">
+            <div class="Section-column">
+                <div class="Section-columnSection">
+                    <header class="Section-header">
+                        <strong class="Section-title">{% translate 'Навигация' %}
+                        </strong>
+                    </header>
+                    <div class="Section-columnContent">
+                        <div class="NavigateProfile">
+                            <ul class="menu menu_vt">
+                                <li class="menu-item"><a class="menu-link" href="{% url 'account:account' %}">
+                                    {% translate 'Личный кабинет' %}
+                                </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:profile' %}">
+                                        {% translate 'Профиль' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:orders_history' %}">
+                                        {% translate 'История заказов' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item_ACTIVE menu-item">
+                                    <a class="menu-link" href="{% url 'account:orders_history' %}">
+                                        {% translate 'История просмотров' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="Section-content">
+                <div class="Orders">
+
+                    {% for product in browsing_history %}
+
+                    <div class="Order Order_anons">
+                        <div class="Order-personal">
+                            <div class="row">
+                                <div class="row-block">
+                                    <a class="Order-title" href="{% url 'catalog:product_detail' pk=product.pk %}">
+
+                                        <img src="{{product.avatar.image.url}}" alt="{{product.avatar.name}}">
+
+                                    </a>
+                                    <div class="Order-infoType">
+                                        {% translate 'Наименование:' %}
+                                    </div>
+                                    <div class="Order-infoContent">
+
+                                        {{ product.name }}
+
+                                    </div>
+                                </div>
+
+                                <div class="row-block">
+                                    <div class="Order-info Order-info_delivery">
+
+                                    </div>
+
+                                    <div>
+                                        <div class="Order-infoType">
+                                            {% translate 'Описание:' %}
+                                        </div>
+                                        <div class="Order-infoContent">
+
+                                            {{ product.description }}
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                    <h2>{% translate 'Здесь еще нет ни одного товара.' %}</h2>
+                    <a href="{% url 'core:index' %}">
+                        <h3>{% translate 'Перейти к покупкам.' %}</h3>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

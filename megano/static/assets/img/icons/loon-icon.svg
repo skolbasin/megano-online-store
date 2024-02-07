@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="55" height="55" viewBox="0 0 400 400" xml:space="preserve">
+<desc>Created with Fabric.js 3.6.2</desc>
+<defs>
+</defs>
+<g transform="matrix(6.25 0 0 6.25 200 200)" id="Stock_cut"  >
+<circle style="stroke: rgb(85,85,85); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"  cx="0" cy="0" r="15" />
+</g>
+<g transform="matrix(6.25 0 0 6.25 200 237.5)" id="Stock_cut"  >
+<path style="stroke: rgb(85,85,85); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"  transform=" translate(-16, -22)" d="M 26 27 L 26 27 c 0 -5.523 -4.477 -10 -10 -10 h 0 c -5.523 0 -10 4.477 -10 10 v 0" stroke-linecap="round" />
+</g>
+<g transform="matrix(6.25 0 0 6.25 200 168.75)" id="Stock_cut"  >
+<circle style="stroke: rgb(85,85,85); stroke-width: 2; stroke-dasharray: none; stroke-linecap: butt; stroke-dashoffset: 0; stroke-linejoin: round; stroke-miterlimit: 10; fill: none; fill-rule: nonzero; opacity: 1;"  cx="0" cy="0" r="6" />
+</g>
+</svg>

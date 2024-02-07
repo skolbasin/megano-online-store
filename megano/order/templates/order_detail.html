@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="Middle Middle_top">
+    <div class="Middle-top">
+        <div class="wrap">
+            <div class="Middle-header">
+                <h1 class="Middle-title">{% translate 'Заказ №' %}{{order.pk}}
+                </h1>
+            </div>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="wrap">
+            <div class="Section-content">
+                <div class="Orders">
+                </div>
+                <div class="Order">
+                    <div class="Order-infoBlock">
+                        <div class="Order-personal">
+                            <div class="row">
+                                <div class="row-block">
+                                    <div class="Order-info Order-info_date">
+                                        <div class="Order-infoType">{% translate 'Дата заказа:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.created_date|date:"d.m.Y"}}
+                                        </div>
+                                    </div>
+                                    <div class="Order-info">
+                                        <div class="Order-infoType">{% translate 'ФИО:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.profile.user.username}}
+                                        </div>
+                                    </div>
+                                    <div class="Order-info">
+                                        <div class="Order-infoType">{% translate 'Телефон:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.profile.phone}}
+                                        </div>
+                                    </div>
+                                    <div class="Order-info">
+                                        <div class="Order-infoType">{% translate 'E-mail:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.profile.user.email}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-block">
+                                    <div class="Order-info Order-info_delivery">
+                                        <div class="Order-infoType">{% translate 'Тип доставки:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.get_delivery_method_display}}
+                                        </div>
+                                    </div>
+                                    <div class="Order-info">
+                                        <div class="Order-infoType">{% translate 'Адрес:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.delivery_address}}
+                                        </div>
+                                    </div>
+                                    <div class="Order-info Order-info_pay">
+                                        <div class="Order-infoType">{% translate 'Оплата:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.get_payment_method_display}}
+                                        </div>
+                                    </div>
+                                    <div class="Order-info Order-info_status">
+                                        <div class="Order-infoType">{% translate 'Статус:' %}
+                                        </div>
+                                        <div class="Order-infoContent">{{order.get_order_status_display}}
+                                        </div>
+                                    </div>
+                                    {% if order.order_status == "NOT_PAID" %}
+                                    <div class="Order-info Order-info_error">
+                                        <div class="Order-infoType">{% translate 'Оплата не прошла:' %}
+                                        </div>
+                                        {% if order.payment_error == None %}
+                                        <div class="Order-infoContent">{% translate 'Оплата не выполнена' %}
+                                        </div>
+                                        {% else %}
+                                        <div class="Order-infoContent">{{order.payment_error}}
+                                        </div>
+                                        {% endif %}
+
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Cart Cart_order">
+                            {% for item in order.order_items.all %}
+                            <div class="Cart-product">
+                                <div class="Cart-block Cart-block_row">
+                                    <div class="Cart-block Cart-block_pict"><a class="Cart-pict"
+                                                                               href="{% url 'catalog:product_detail' pk=item.stock.product.pk %}"><img
+                                            class="Cart-img" src="{{item.stock.product.avatar.image.url}}"
+                                            alt="{{item.stock.product.image.alt}}"/></a>
+                                    </div>
+                                    <div class="Cart-block Cart-block_info"><a class="Cart-title"
+                                                                               href="{% url 'catalog:product_detail' pk=item.stock.product.pk %}">{{item.stock.product.name}}</a>
+                                        <div class="Cart-desc">{{item.stock.product.description}}
+                                        </div>
+                                    </div>
+                                    <div class="Cart-block Cart-block_price">
+                                        <div class="Cart-price">{{item.full_price}}$
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Cart-block Cart-block_row">
+                                    <div class="Cart-block Cart-block_amount">{{item.count}} {% translate 'шт.' %}
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+
+
+                            <div class="Cart-total">
+                                <div class="Cart-block Cart-block_total">
+                                    <strong class="Cart-title">{% translate 'Итого:' %}<span class="Cart-price">{{order.price}}$</span>
+                                    </strong>
+                                </div>
+                                {% if order.order_status == "NOT_PAID" %}
+                                <div class="Cart-block"><a class="btn btn_primary btn_lg"
+                                                           href="{% url 'order:payment_with_payment_method' pk=order.pk %}">{% translate 'Оплатить' %}</a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

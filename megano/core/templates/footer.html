@@ -1,0 +1,75 @@
+{% load i18n %}
+{% load static %}
+<footer class="Footer">
+    <div class="wrap">
+        <div class="row Footer-main">
+            <div class="row-block">
+                <a class="logo Footer-logo" href="/">
+                    <img class="logo-image" src="{% static 'assets/img/logo_footer.png' %}"
+                         alt="logo_footer.png"/>
+                </a>
+            </div>
+            <div class="row-block">
+                <strong class="Footer-title">{% translate 'Навигация' %}
+                </strong>
+                <ul class="menu menu_vt Footer-menu">
+                    <li class="menu-item">
+                        <a class="menu-link"
+                           href="/">{% translate 'Главная' %}
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">{% translate 'Каталог' %}
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="">{% translate 'Сравнение' %}
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{% url 'account:profile' %}">{% translate 'Профиль' %}
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+            <div class="row-block">
+                <strong class="Footer-title">{% translate 'Контакты' %}</strong>
+                <p>{% translate 'Phone:' %} 8.800.200.600<br>{% translate 'Email:' %} xxx@meg.com<br>
+                </p>
+                <ul class="menu menu_img menu_smallImg Footer-menuSoc">
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{% static 'assets/img/icons/socialFooter/fb.svg' %}"
+                                 alt="fb.svg"/>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{% static 'assets/img/icons/socialFooter/tw.svg' %}"
+                                 alt="tw.svg"/>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{% static 'assets/img/icons/socialFooter/in.svg' %}"
+                                 alt="in.svg"/>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{% static 'assets/img/icons/socialFooter/pt.svg' %}"
+                                 alt="pt.svg"/>
+                        </a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="#">
+                            <img src="{% static 'assets/img/icons/socialFooter/mail.svg' %}"
+                                 alt="mail.svg"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>

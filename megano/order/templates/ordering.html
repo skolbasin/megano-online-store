@@ -1,0 +1,421 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+
+<div class="Middle Middle_top">
+    <div class="Section Section_column Section_columnRight Section_columnWide Order">
+        <div class="wrap">
+
+            <div class="Section-column">
+                <div class="Section-columnSection">
+                    <header class="Section-header">
+                        <strong class="Section-title">{% translate 'Прогресс заполнения' %}
+                        </strong>
+                    </header>
+                    <div class="Section-columnContent">
+                        <div class="NavigateProfile">
+                            <ul class="menu menu_vt">
+                                <li class="menu-item_ACTIVE menu-item"><a class="menu-link" href="#step1">{% translate 'Шаг 1. Параметры пользователя' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item"><a class="menu-link" href="#step2">{% translate 'Шаг 2. Способ доставки' %}</a>
+                                </li>
+                                <li class="menu-item"><a class="menu-link" href="#step3">{% translate 'Шаг 3. Способ оплаты' %}</a>
+                                </li>
+                                <li class="menu-item"><a class="menu-link" href="#step4">{% translate 'Шаг 4. Подтверждение заказа' %}</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="Section-content">
+                <form class="form" method="post">
+                    {% csrf_token %}
+                    <div class="Order-block Order-block_OPEN" id="step1">
+                        <header class="Section-header Section-header_sm">
+                            <h2 class="Section-title">{% translate 'Шаг 1. Параметры пользователя' %}
+                            </h2>
+                        </header>
+                        <div class="row">
+                            <div class="row-block">
+                                {% if not request.user.is_authenticated %}
+
+                                {% if form_user.username.errors %}
+                                <div class="form-group">
+                                    <p title={% translate "Введите до 3 слов в формате 'Имя Фамилия Отчество'" %}>{%translate 'ФИО' %}</p>
+                                    <label class="form-label">ФИО</label>
+                                    <input class="form-input is-invalid" id="username"
+                                           style="border:1px solid #ff0000" name="username"
+                                           value="{{ request.user.username }}" type="text"
+                                           data-validate="require"/>
+                                    {% for error in form_user.username.errors %}
+                                    <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                    {% endfor %}
+                                </div>
+                                {% else %}
+                                <div class="form-group">
+                                    <label class="form-label">{% translate 'ФИО' %}</label>
+                                    <input class="form-input" id="username" name="username" type="text"
+                                           data-validate="require"/>
+                                </div>
+
+
+                                {% endif %}
+
+                                <div class="form-group">
+
+                                    {% if form_profile.phone.errors %}
+                                    <label for="phone">{% translate 'Ваш телефон:' %} {{ number }}</label>
+                                    <input id="phone" name="phone" type="tel" maxlength="50"
+                                           autofocus="autofocus" required="required"
+                                           value="{{ phone_formatted }}"
+                                           style="border:1px solid #ff0000"
+                                           pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+                                           placeholder="+7 (___) ___-__-__">
+                                    {% for error in form_profile.phone.errors %}
+                                    <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <label for="phone">{% translate 'Ваш телефон:' %} {{ number }}</label>
+                                    <input id="phone" name="phone" type="tel" maxlength="50"
+                                           autofocus="autofocus" required="required"
+                                           pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+                                           placeholder="+7 (___) ___-__-__">
+                                    {% endif %}
+                                    <script type="text/javascript">
+                                    function setCursorPosition(pos, e) {
+                                        e.focus();
+                                        if (e.setSelectionRange) e.setSelectionRange(pos, pos);
+                                        else if (e.createTextRange) {
+                                            var range = e.createTextRange();
+                                            range.collapse(true);
+                                            range.moveEnd("character", pos);
+                                            range.moveStart("character", pos);
+                                            range.select()
+                                        }
+                                    }
+
+                                    function mask(e) {
+                                        //console.log('mask',e);
+                                        var matrix = this.placeholder,// .defaultValue
+                                            i = 0,
+                                            def = matrix.replace(/\D/g, ""),
+                                            val = this.value.replace(/\D/g, "");
+                                        def.length >= val.length && (val = def);
+                                        matrix = matrix.replace(/[_\d]/g, function (a) {
+                                            return val.charAt(i++) || "_"
+                                        });
+                                        this.value = matrix;
+                                        i = matrix.lastIndexOf(val.substr(-1));
+                                        i < matrix.length && matrix != this.placeholder ? i++ : i = matrix.indexOf("_");
+                                        setCursorPosition(i, this)
+                                    }
+
+                                    window.addEventListener("DOMContentLoaded", function () {
+                                        var input = document.querySelector("#online_phone");
+                                        input.addEventListener("input", mask, false);
+                                        input.focus();
+                                        setCursorPosition(3, input);
+                                    });
+
+                                    </script>
+
+                                </div>
+                                <div class="form-group">
+
+                                    {% if form_user.email.errors %}
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">{% translate 'E-mail' %}
+                                        </label>
+                                        <input class="form-input" id="email" name="email" type="text"
+                                               value="{{request.user.email}}"
+                                               style="border:1px solid #ff0000"
+                                               data-validate="require"/>
+                                    </div>
+                                    {% for error in form_user.email.errors %}
+                                    <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <div class="form-group">
+                                        <label class="form-label" for="email">{% translate 'E-mail' %}
+                                        </label>
+                                        <input class="form-input" id="email" name="email" type="text"
+                                               data-validate="require"/>
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                            <div class="row-block">
+                                <div class="form-group">
+
+                                    {% if form_user.password.errors %}
+                                    <div class="form-group">
+                                        <label for="id_password">{% translate 'Пароль:' %}</label>
+                                        <input type="password" name="password" class="form-control"
+                                               style="border:1px solid #ff0000"
+                                               id="id_password">
+                                    </div>
+                                    {% else %}
+                                    <div class="form-group">
+                                        <label for="id_password">{% translate 'Пароль:' %} </label>
+                                        <input type="password" name="password" class="form-control"
+                                               id="id_password">
+                                    </div>
+                                    {% endif %}
+
+
+                                </div>
+                                <div class="form-group">
+
+                                    {% if form_user.password2.errors %}
+                                    <div class="form-group">
+                                        <label for="id_password2">{% translate 'Подтверждение пароля:' %}</label>
+                                        <input type="password" name="password2" class="form-control"
+                                               style="border:1px solid #ff0000"
+                                               id="id_password2">
+                                    </div>
+                                    {% for error in form_user.password2.errors %}
+                                    <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                    {% endfor %}
+                                    {% else %}
+                                    <div class="form-group">
+                                        <label for="id_password2">{% translate 'Подтверждение пароля:' %}</label>
+                                        <input type="password" name="password2" class="form-control"
+                                               id="id_password2">
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+                                <div class="form-group">
+                                    <a class="btn btn_muted Order-btnReg" href="{% url 'account:login' %}">{% translate 'Я уже зарегистрирован' %}</a>
+
+                                </div>
+                                {% else %}
+
+                                <div class="form-group">
+                                    <label class="form-label">{% translate 'ФИО' %}</label>
+                                    <p class="form-input">{{ request.user.username }}</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="email">{% translate 'E-mail' %}
+                                    </label>
+                                    <p class="form-input">{{ request.user.email }}</p>
+
+                                </div>
+                                <div class="form-group">
+
+                                    <label for="phone">{% translate 'Ваш телефон:' %} {{ number }}</label>
+
+                                    <p class="form-input">{{ request.user.profile.phone }}</p>
+                                </div>
+                                <div class="form-group">
+                                    <a class="btn btn_muted Order-btnReg" href="{% url 'account:profile' %}">{% translate 'Редактировать профиль' %}</a>
+
+                                </div>
+
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="Order-footer"><a class="btn btn_success Order-next" href="#step2">{% translate 'Дальше' %}</a>
+                        </div>
+                    </div>
+                    <div class="Order-block" id="step2">
+                        <header class="Section-header Section-header_sm">
+                            <h2 class="Section-title">{% translate 'Шаг 2. Способ доставки' %}
+                            </h2>
+                        </header>
+                        <div class="form-group">
+                            <select name="delivery_method" id="delivery_method_input" required="required">
+                                <option value="EMPTY">{% translate 'Выберите вариант доставки' %}</option>
+                                <option value="DELIVERY">{% translate 'Обычная доставка' %}</option>
+                                <option value="EXPRESS_DELIVERY">{% translate 'Экспресс доставка' %}</option>
+                            </select>
+
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="city">{% translate 'Город' %}
+                            </label>
+                            <input class="form-input" id="city" name="city" type="text"/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="address">{% translate 'Адрес' %}
+                            </label>
+                            <textarea class="form-textarea" name="address" id="address"></textarea>
+                        </div>
+                        <div class="Order-footer"><a class="btn btn_success Order-next" href="#step3">{% translate 'Дальше' %}</a>
+                        </div>
+                    </div>
+                    <div class="Order-block" id="step3">
+                        <header class="Section-header Section-header_sm">
+                            <h2 class="Section-title">{% translate 'Шаг 3. Способ оплаты' %}
+                            </h2>
+                        </header>
+                        <div class="form-group">
+                            <select name="payment_method" id="payment_method_input" required="required">
+                                <option value="EMPTY">{% translate 'Выберите вариант оплаты' %}</option>
+                                <option value="CARD">{% translate 'Онлайн картой' %}</option>
+                                <option value="SOMEONE_ACCOUNT">{% translate 'Онлайн картой с чужего счета' %}</option>
+                            </select>
+                        </div>
+                        <div class="Order-footer"><a class="btn btn_success Order-next" href="#step4">{% translate 'Дальше' %}</a>
+                        </div>
+                    </div>
+                    <div class="Order-block" id="step4">
+                        <header class="Section-header Section-header_sm">
+                            <h2 class="Section-title">{% translate 'Шаг 4. Подтверждение заказа' %}
+                            </h2>
+                        </header>
+                        <!--+div.Order.-confirmation-->
+                        <div class="Order-infoBlock">
+                            <div class="Order-personal">
+                                <div class="row">
+                                    <div class="row-block">
+                                        <div class="Order-info">
+                                            <div class="Order-infoType">{% translate 'ФИО:' %}
+                                            </div>
+                                            <div class="Order-infoContent">{{request.user.username}}
+                                            </div>
+                                        </div>
+                                        <div class="Order-info">
+                                            <div class="Order-infoType">{% translate 'Телефон:' %}
+                                            </div>
+                                            <div class="Order-infoContent">{{request.user.profile.phone}}
+                                            </div>
+                                        </div>
+                                        <div class="Order-info">
+                                            <div class="Order-infoType">{% translate 'E-mail:' %}
+                                            </div>
+                                            <div class="Order-infoContent">{{request.user.email}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row-block">
+                                        <div class="Order-info Order-info_delivery">
+                                            <div class="Order-infoType">{% translate 'Тип доставки:' %}
+                                            </div>
+                                            <div class="Order-infoContent" id="delivery_method_output"></div>
+                                            <script>
+                                                var deliveryMethodInput = document.getElementById("delivery_method_input");
+                                                var deliveryMethodOutput = document.getElementById("delivery_method_output");
+
+                                                deliveryMethodInput.addEventListener("change", function() {
+                                                  deliveryMethodOutput.textContent = deliveryMethodInput.value;
+                                                });
+                                            </script>
+                                        </div>
+                                        <div class="Order-info">
+                                            <div class="Order-infoType">{% translate 'Город:' %}
+                                            </div>
+                                            <div class="Order-infoContent" id="city_output"></div>
+                                            <script>
+                                                var cityInput = document.getElementById("city");
+                                                var cityOutput = document.getElementById("city_output");
+
+                                                cityInput.addEventListener("input", function() {
+                                                  cityOutput.textContent = cityInput.value;
+                                                });
+                                            </script>
+                                        </div>
+                                        <div class="Order-info">
+                                            <div class="Order-infoType">{% translate 'Адрес:' %}
+                                            </div>
+                                            <div class="Order-infoContent" id="address_output">
+                                                {% if None %}
+                                                Нет
+                                                {% endif %}
+                                            </div>
+                                            <script>
+                                                var addressInput = document.getElementById("address");
+                                                var addressOutput = document.getElementById("address_output");
+
+                                                addressInput.addEventListener("input", function() {
+                                                  addressOutput.textContent = addressInput.value;
+                                                });
+                                            </script>
+                                        </div>
+                                        <div class="Order-info Order-info_pay">
+                                            <div class="Order-infoType">{% translate 'Оплата:' %}
+                                            </div>
+                                            <div class="Order-infoContent" id="payment_method_output"></div>
+                                            <script>
+                                                var paymentMethodInput = document.getElementById("payment_method_input");
+                                                var paymentMethodOutput = document.getElementById("payment_method_output");
+
+                                                paymentMethodInput.addEventListener("change", function() {
+                                                  paymentMethodOutput.textContent = paymentMethodInput.value;
+                                                });
+                                            </script>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Cart Cart_order">
+                                {% if product_items %}
+                                {% for item in product_items %}
+                                <div class="Cart-product">
+                                    <div class="Cart-block Cart-block_row">
+
+                                        <div class="Cart-block Cart-block_pict">
+                                            <a class="Cart-pict"
+                                               href="{% url 'catalog:product_detail' pk=item.product.pk %}">
+                                                <img class="Cart-img" src="{{item.product.avatar.image.url}}"
+                                                     alt="{{item.product.avatar.alt}}">
+                                            </a>
+                                        </div>
+
+                                        <div class="Cart-block Cart-block_info">
+                                            <a class="Cart-title"
+                                               href="{% url 'catalog:product_detail' pk=item.product.pk %}">{{item.product.name}}</a>
+                                            <div class="Cart-desc">{{item.product.description}}</div>
+                                        </div>
+
+                                        <div class="Cart-block Cart-block_price">
+                                            <div class="Cart-price">{{item.price}}$
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="Cart-block Cart-block_row">
+                                        <div class="Cart-block Cart-block_amount">{{item.quantity}} {% translate 'шт.' %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                                <div class="form-group">
+                                    <label class="form-label" for="comment">{% translate 'Комментарий к заказу' %}
+                                    </label>
+                                    <input class="form-input" id="comment" name="comment" type="text"/>
+                                </div>
+                                <div class="Cart-total">
+                                    <div class="Cart-block Cart-block_total">
+                                        <strong class="Cart-title">{% translate 'Итого:' %}
+                                        </strong><span class="Cart-price">{{ full_price }}$</span>
+                                    </div>
+                                    <div class="Cart-block">
+                                        <button class="btn btn_primary btn_lg" type="submit">
+                                            {% translate 'Оплатить' %}
+                                        </button>
+                                    </div>
+                                </div>
+                                {% else %}
+                                <h2 class="Section-title">{% translate 'Нет товаров в корзине' %}</h2>
+                                <div class="Cart-block">
+                                    <a class="btn btn_primary btn_lg" href="{% url 'core:index' %}">{% translate 'Перейти к каталогу' %}</a>
+                                    {% endif %}
+
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

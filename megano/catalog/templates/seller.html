@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Section Section_column">
+            <div class="wrap">
+                <div class="Section-content Seller-section">
+                    <div class="Account-group">
+                        <div class="Account-column">
+                            <div class="Account-avatar">
+                                {% if seller.image %}
+                                    <img src="{{ seller.image.url }}"
+                                         alt="{{ seller.image.name }}">
+                                {% else %}
+                                    <img src="{% static 'assets/img/icons/profile.png' %}" alt="default seller avatar">
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="Account-column">
+                            <div class="Account-name">
+                                {{ seller.name }}
+                            </div>
+                            <p class="Seller-discription">
+                                {{ seller.description }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="Account-group">
+                        <ul class="Seller-info-list">
+                            <li class="Seller-info-item">
+                                <div class="Seller-info-header">
+                                    {% translate 'Телефон:' %}
+                                </div>
+                                <div class="Seller-info-content">
+                                    {{ seller.phone }}
+                                </div>
+                            </li>
+                            <li class="Seller-info-item">
+                                <div class="Seller-info-header">
+                                    {% translate 'Адресс:' %}
+                                </div>
+                                <div class="Seller-info-content">
+                                    {{ seller.address }}
+                                </div>
+                            </li>
+                            <li class="Seller-info-item">
+                                <div class="Seller-info-header">
+                                    {% translate 'email:' %}
+                                </div>
+                                <div class="Seller-info-content">
+                                    {{ seller.email }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="Account-group Seller-products">
+                        {% if top_stocks %}
+                            <div class="Seller-products-header">
+                                {% translate 'Популярные товары' %}
+                            </div>
+                            <ul class="Seller-product-list">
+                                {% for item in top_stocks %}
+                                    <li class="Seller-product-item">
+                                        <div class="Seller-product-info">
+                                            <div class="Seller-product-title">
+                                                <a href="{% url 'catalog:product_detail' pk=item.product.pk %}"
+                                                   class="Seller-product-link">
+                                                    {{ item.product.name }}
+                                                </a>
+                                            </div>
+                                            <div class="Seller-product-price">
+                                                {{ item.price }} ₽
+                                            </div>
+                                        </div>
+
+                                        <div class="ProductCard-cart Seller-product-cart">
+                                            <form method="post"
+                                                  class="ProductCard-cart">
+                                                {% csrf_token %}
+                                                <input hidden name="stock"
+                                                       value="{{ item.pk }}">
+                                                <div class="ProductCard-cartElement ProductCard-cartElement_amount">
+                                                    <div class="Amount Amount_product">
+                                                        <button class="Amount-remove"
+                                                                type="button">
+                                                        </button>
+                                                        <input class="Amount-input form-input"
+                                                               name="amount" type="text"
+                                                               value="1"/>
+                                                        <button class="Amount-add"
+                                                                type="button">
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                <div class="ProductCard-cartElement">
+                                                    <button class="btn btn_primary"
+                                                            type="submit">
+                                                        <img class="btn-icon"
+                                                             src="{% static 'assets/img/icons/card/cart_white.svg' %}"
+                                                             alt="cart_white.svg"/>
+                                                        {% translate 'Купить' %}
+                                                    </button>
+                                                </div>
+                                            </form>
+                                            <div id="modal_open" class="my_modal">
+                                                <div class="my_modal-dialog">
+                                                    <div class="my_modal-content">
+                                                        <div class="my_modal-header">
+                                                            <p class="my_modal-title">
+                                                                {% translate 'Поздравляем!' %}
+                                                            </p>
+                                                            <a href="#"
+                                                               title="Закрыть модальное окно"
+                                                               class="close">×</a>
+                                                        </div>
+                                                        <div class="my_modal-body">
+                                                            <p>
+                                                                {% translate 'Товар успешно добавлен в
+                                                                корзину!' %}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% if stock_added and item.pk == stock_added.pk %}
+                                            <div class="Product-added-message">
+                                                {% translate 'Product added to cart!' %}
+                                            </div>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="Seller-products-header">
+                                {% translate 'У этого продавца пока нет ни одного товара.' %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

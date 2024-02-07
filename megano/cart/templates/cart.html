@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+{% if cart %}
+<div class="Middle Middle_top">
+        <div class="Section">
+            <div class="wrap">
+                <form class="form Cart" action="#" method="post">
+                    {% for item in cart_items %}
+                    <div class="Cart-product">
+                        <div class="Cart-block Cart-block_row">
+                            <div class="Cart-block Cart-block_pict"><a class="Cart-pict" href="#"><img class="Cart-img" src="{{ item.avatar.image.url }}" alt="image"></a>
+                            </div>
+                            <div class="Cart-block Cart-block_info"><a class="Cart-title" href="#">{{ item.name }}</a>
+                                <div class="Cart-desc">{{ item.description }}
+                                </div>
+                            </div>
+                            <div class="Cart-block Cart-block_price">
+                                <div class="Cart-price">{{ item.price }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Cart-block Cart-block_row">
+                            <div class="Cart-block Cart-block_seller">
+                                <div class="Cart-seller">{{ item.seller }}
+                                </div>
+                            </div>
+                            <div class="Cart-block Cart-block_amount">
+                                <div class="Cart-amount">
+                                    <div class="Amount">
+                                        <form method="post" action ="{% url 'cart:cart_details' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="id" value='{{ item.id }}'>
+                                                <input type="hidden" name="count" value=1>
+                                                <input type="hidden" name="delete" value=True>
+                                                <button style="height: 55px; width: 55px;" type="submit">-</button>
+                                        </form>
+
+                                        <input class="Amount-input form-input" name="amount" type="text" value="{{ item.count }}">
+                                            <form method="post" action ="{% url 'cart:cart_details' %}">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="id" value='{{ item.id }}'>
+                                                <input type="hidden" name="count" value=1>
+                                                <button style="height: 55px; width: 55px;" type="submit">+</button>
+                                            </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="Cart-block Cart-block_delete"><a class="Cart-delete" href="{% url 'cart:delete_product' stock_id=item.id %}"><img src="{% static 'assets/img/icons/card/delete.svg' %}" alt="delete.svg"></a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="Cart-total">
+                        <div class="Cart-block Cart-block_total">
+                            <strong class="Cart-title">{% translate 'Итого:' %}
+                            </strong><span class="Cart-price">{{ total_price }}</span>
+                            {% if promocode %}
+                            <div>
+                            <strong class="Cart-title">{% translate 'Применен промокод:' %}</strong>
+                            </div>
+                            {{ promocode }}
+                                {% endif %}
+                            <div>
+                            <strong class="Cart-title">{% translate 'Введит свой промокод:' %}
+                                <form method="post" action ="{% url 'cart:add_promocode' %}">
+                                    {% csrf_token %}
+                                    <input type="text" name="promocode">
+                                    <button type="submit">Отправить</button>
+                                </form>
+                                {% if promocode_error %}
+                                    {{ promocode_error }}
+                                {% endif %}
+                            </strong>
+                        </div>
+                        </div>
+                        <div class="Cart-block"><a class="btn btn_success btn_lg" href="{% url 'order:ordering' %}"> {% translate 'Оформить заказ' %}</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% else %}
+<div style="height: 250px">
+    {% url 'catalog:catalog' 1 as catalog %}
+    {% blocktranslate %}
+    Корзина пустая. Чтобы добавить товар в корзину, выберите нужный товар в каталоге.
+    {% endblocktranslate %}
+    <p><a href="{{ catalog }}">Перейти в каталог</a></p>
+</div>
+{% endif %}
+{% endblock %}
+

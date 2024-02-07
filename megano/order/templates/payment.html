@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="Middle Middle_top">
+    <div class="Middle-top">
+        <div class="wrap">
+            <div class="Middle-header">
+                <h1 class="Middle-title">{% translate 'Оплата:' %} {{message}}
+                </h1>
+                <ul class="breadcrumbs Middle-breadcrumbs">
+                    <li class="breadcrumbs-item"><a href="index.html">{% translate 'home' %}</a>
+                    </li>
+                    <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% translate 'Оплата' %}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="wrap">
+            <form class="form Payment" method="post">
+                {% csrf_token %}
+                <div class="Cart-product">Заказ №{{pk}}</div>
+
+                <div class="Payment-card">
+                    <div class="form-group">
+                        <label class="form-label">{% translate 'Номер карты' %}
+                        </label>
+                        <input class="form-input Payment-bill" id="card_number" name="card_number" type="text"
+                               placeholder="9999 9999" data-mask="9999 9999" data-validate="require pay"/>
+                    </div>
+                    {% if current_order_payment == "SOMEONE_ACCOUNT" %}
+                        <div class="form-group"><a class="btn btn_success Payment-generate" href="#">{% translate 'Сгенирировать случайный счет' %}</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="Payment-pay">
+                    <button class="btn btn_primary btn_lg" type="submit">
+                        {% translate 'Оплатить' %}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

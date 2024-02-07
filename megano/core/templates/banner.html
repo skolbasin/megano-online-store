@@ -1,0 +1,54 @@
+{% load i18n %}
+<div class="slider">
+    {% for banner in banners %}
+    <div class="slide{% if forloop.counter == active_slide %} active{% endif %}" data-slide="{{ forloop.counter }}">
+        <img src="{{ banner.image.url }}" alt="{{ banner.title }}">
+        <div class="slide-content">
+            <h2>{{ banner.title }}</h2>
+            <p>{{ banner.text }}</p>
+            <a href="{{ banner.link }}" class="btn">{{ banner.link_text }}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="slider-controls">
+    <button class="prev-slide">{% translate 'Предыдущий' %}</button>
+    <button class="next-slide">{% translate 'Следующий' %}</button>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var slider = $('.slider');
+        var slides = slider.find('.slide');
+        var currentSlide = 0;
+        var interval = setInterval(nextSlide, 5000);
+
+        function nextSlide() {
+            slides.removeClass('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides.eq(currentSlide).addClass('active');
+        }
+
+        slider.on('mouseenter', function () {
+            clearInterval(interval);
+        });
+
+        slider.on('mouseleave', function () {
+            interval = setInterval(nextSlide, 5000);
+        });
+
+        $('.prev-slide').on('click', function () {
+            slides.removeClass('active');
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            slides.eq(currentSlide).addClass('active');
+        });
+
+        $('.next-slide').on('click', function () {
+            slides.removeClass('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides.eq(currentSlide).addClass('active');
+        });
+    });
+</script>

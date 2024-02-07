@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="Middle Middle_top">
+        <div class="Section">
+            <div class="wrap">
+                <div class="Product">
+                    <div class="ProductCard">
+                        <div class="ProductCard-look">
+                            <div style="width: 40%" class="ProductCard-photo">
+                                <img src="{{ sale.image.url }}" alt="SalePhoto.png">
+                            </div>
+
+                        </div>
+                        <div class="ProductCard-desc">
+                            <div class="ProductCard-header">
+                                <h2 class="ProductCard-title">{{ sale.title }}
+                                </h2>
+                            </div>
+                            <div class="ProductCard-text">
+                                <ul>
+                                    <li>Акция действует до {{ sale.date_end }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="ProductCard-cart">
+                                <div class="ProductCard-cartElement">
+                                    <a class="btn btn_primary" href="{% url 'catalog:add_sale_to_cart' sale_id=sale.id %}">
+                                        <span class="btn-content">Добавить в корзину</span>
+                                        <img src="{% static 'assets/img/icons/card/cart_white.svg' %}" alt="cart.svg" />
+                                    </a>
+                                </div>
+                                <div id="modal_open" class="my_modal">
+                                    <div class="my_modal-dialog">
+                                        <div class="my_modal-content">
+                                            <div class="my_modal-header">
+                                                <p class="my_modal-title">Поздравляем!</p>
+                                                <a href="#" title="Закрыть модальное окно" class="close">×</a>
+                                            </div>
+                                            <div class="my_modal-body">
+                                                <p>Товар успешно добавлен в корзину!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Tabs Tabs_default">
+                        <div class="Tabs-links">
+                            <a class="Tabs-link Tabs-link_ACTIVE" href="#description">
+                                <span>Описание</span>
+                            </a>
+                            <a class="Tabs-link" href="#sellers">
+                                <span>Акционные товары</span>
+                            </a>
+                        </div>
+                        <div class="Tabs-wrap">
+                            <div class="Tabs-block" id="description" style="">
+                                <h2>Уважаемый покупатель!
+                                </h2>
+                                <p>{{ sale.description }}</p>
+                                </div>
+                            </div>
+                            <div class="Tabs-block" id="sellers" style="display: none;">
+                                <div class="Section-content">
+                                    <div class="Orders">
+                                        {% for stock in sale.stocks.all  %}
+                                        <div class="Order Order_anons">
+                                            <div class="Order-personal">
+                                                <div class="row">
+                                                    <div class="row-block">
+                                                        <a class="Order-title" href="oneorder.html">
+                                                            {{ stock.product.name }}
+                                                        </a>
+                                                        <div class="ProductCard-cartElement" style="margin-top: 10px;">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row-block">
+                                                        <div class="Order-info Order-info_delivery">
+                                                            <div class="Order-infoType">Цена без скидки
+                                                            </div>
+                                                            <div class="Order-infoContent">{{ stock.price }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="Order-info Order-info_pay">
+                                                            <div class="Order-infoType">Размер скидки:
+                                                            </div>
+                                                            <div class="Order-infoContent">{{ sale.sale_count }}
+                                                                {% if sale.sale_type == 'ruble' %}
+                                                                    р.
+                                                                {% else %}
+                                                                    %
+                                                                {% endif %}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

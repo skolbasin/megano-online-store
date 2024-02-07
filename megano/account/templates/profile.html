@@ -1,0 +1,241 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="Middle Middle_top">
+
+    <div class="Section Section_column Section_columnLeft">
+        <div class="wrap">
+            <div class="Section-column">
+                <div class="Section-columnSection">
+                    <header class="Section-header">
+                        <strong class="Section-title">{% translate 'Навигация' %}
+                        </strong>
+                    </header>
+                    <div class="Section-columnContent">
+                        <div class="NavigateProfile">
+                            <ul class="menu menu_vt">
+                                <li class="menu-item"><a class="menu-link" href="{% url 'account:account' %}">{% translate 'Личный кабинет' %}</a>
+                                </li>
+                                <li class="menu-item_ACTIVE menu-item">
+                                    <a class="menu-link" href="{% url 'account:profile' %}">{% translate 'Профиль' %}</a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:orders_history' %}">
+                                        {% translate 'История заказов' %}
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a class="menu-link" href="{% url 'account:browsing_history' %}">
+                                        {% translate 'История просмотров' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="Section-content">
+                <div class="Profile">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="row-block">
+                                <div class="form-group">
+                                    <label class="form-label" for="avatar">{% translate 'Аватар' %}
+                                    </label>
+                                    <div class="Profile-avatar Profile-avatar_noimg">
+                                        {% if request.user.profile.avatar %}
+                                            <img
+                                                src="{{ request.user.profile.avatar.url }}"
+                                                alt="Аватар пользователя"
+                                                style="width: 110%; height: 100%; object-fit: contain;"
+                                            >
+                                            <input
+                                                class="Profile-file form-input"
+                                                id="avatar"
+                                                name="avatar"
+                                                type="file"
+                                                data-validate="onlyImgAvatar"
+                                                style="width: 100%; height: 100%; object-fit: contain;"
+                                            />
+                                        {% else %}
+                                            <label class="Profile-fileLabel" for="avatar">
+                                                {% translate 'Загрузить фото' %}
+                                            </label>
+
+                                            <input class="Profile-file form-input" id="avatar" name="avatar" type="file" data-validate="onlyImgAvatar" />
+                                        {% endif %}
+                                    </div>
+
+                                    {% for error in form_profile.avatar.errors %}
+                                    <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                    {% endfor %}
+                                </div>
+                                <div class="form-group">
+                                    {% if form_user.username.errors %}
+                                    <div class="form-group">
+                                        <p title={% translate "Введите до 3 слов в формате 'Имя Фамилия Отчество'" %}>{% translate 'ФИО' %}</p>
+                                        <label class="form-label">{% translate 'ФИО' %}</label>
+                                        <input class="form-input is-invalid" id="username"
+                                               style="border:1px solid #ff0000" name="username"
+                                               value="{{ request.user.username }}" type="text"
+                                               data-validate="require"/>
+                                        {% for error in form_user.username.errors %}
+                                        <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                        {% endfor %}
+                                    </div>
+                                    {% else %}
+                                    <div class="form-group">
+                                        <label class="form-label">{% translate 'ФИО' %}</label>
+                                        <input class="form-input" id="username" name="username"
+                                               value="{{ request.user.username }}" type="text"
+                                               data-validate="require"/>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row-block">
+                                {% if form_profile.phone.errors %}
+                                <label for="phone">{% translate 'Ваш телефон:' %} {{ number }}</label>
+                                <input id="phone" name="phone" type="tel" maxlength="50"
+                                       autofocus="autofocus" required="required"
+                                       value="{{ phone_formatted }}"
+                                       style="border:1px solid #ff0000"
+                                       pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+                                       placeholder="+7 (___) ___-__-__">
+                                {% for error in form_profile.phone.errors %}
+                                <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                {% endfor %}
+                                {% else %}
+                                <label for="phone">{% translate 'Ваш телефон:' %} {{ number }}</label>
+                                <input id="phone" name="phone" type="tel" maxlength="50"
+                                       autofocus="autofocus" required="required"
+                                       value="{{ phone_formatted }}"
+                                       pattern="\+7\s?[\(]{0,1}9[0-9]{2}[\)]{0,1}\s?\d{3}[-]{0,1}\d{2}[-]{0,1}\d{2}"
+                                       placeholder="+7 (___) ___-__-__">
+                                {% endif %}
+                                <script type="text/javascript">
+                                    function setCursorPosition(pos, e) {
+                                        e.focus();
+                                        if (e.setSelectionRange) e.setSelectionRange(pos, pos);
+                                        else if (e.createTextRange) {
+                                            var range = e.createTextRange();
+                                            range.collapse(true);
+                                            range.moveEnd("character", pos);
+                                            range.moveStart("character", pos);
+                                            range.select()
+                                        }
+                                    }
+
+                                    function mask(e) {
+                                        //console.log('mask',e);
+                                        var matrix = this.placeholder,// .defaultValue
+                                            i = 0,
+                                            def = matrix.replace(/\D/g, ""),
+                                            val = this.value.replace(/\D/g, "");
+                                        def.length >= val.length && (val = def);
+                                        matrix = matrix.replace(/[_\d]/g, function (a) {
+                                            return val.charAt(i++) || "_"
+                                        });
+                                        this.value = matrix;
+                                        i = matrix.lastIndexOf(val.substr(-1));
+                                        i < matrix.length && matrix != this.placeholder ? i++ : i = matrix.indexOf("_");
+                                        setCursorPosition(i, this)
+                                    }
+
+                                    window.addEventListener("DOMContentLoaded", function () {
+                                        var input = document.querySelector("#online_phone");
+                                        input.addEventListener("input", mask, false);
+                                        input.focus();
+                                        setCursorPosition(3, input);
+                                    });
+                                </script>
+                                {% if form_user.email.errors %}
+                                <div class="form-group">
+                                    <label class="form-label" for="email">{% translate 'E-mail' %}
+                                    </label>
+                                    <input class="form-input" id="email" name="email" type="text"
+                                           value="{{request.user.email}}"
+                                           style="border:1px solid #ff0000"
+                                           data-validate="require"/>
+                                </div>
+                                {% for error in form_user.email.errors %}
+                                <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="form-group">
+                                    <label class="form-label" for="email">{% translate 'E-mail' %}
+                                    </label>
+                                    <input class="form-input" id="email" name="email" type="text"
+                                           value="{{request.user.email}}"
+                                           data-validate="require"/>
+                                </div>
+                                {% endif %}
+                                {% if form_user.old_password.errors %}
+                                <div class="form-group">
+                                    <label for="id_old_password">{% translate 'Старый пароль:' %}</label>
+                                    <input type="password" name="old_password" class="form-control"
+                                           style="border:1px solid #ff0000"
+                                           id="id_old_password">
+                                </div>
+                                {% for error in form_user.old_password.errors %}
+                                <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="form-group">
+                                    <label for="id_old_password">{% translate 'Старый пароль:' %}</label>
+                                    <input type="password" name="old_password" class="form-control"
+                                           id="id_old_password">
+                                </div>
+                                {% endif %}
+                                {% if form_user.new_password1.errors %}
+                                <div class="form-group">
+                                    <label for="id_new_password1">{% translate 'Новый пароль:' %}</label>
+                                    <input type="password" name="new_password1" class="form-control"
+                                           style="border:1px solid #ff0000"
+                                           id="id_new_password1">
+                                </div>
+                                {% for error in new_password1.email.errors %}
+                                <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="form-group">
+                                    <label for="id_new_password1">{% translate 'Новый пароль:' %} </label>
+                                    <input type="password" name="new_password1" class="form-control"
+                                           id="id_new_password1">
+                                </div>
+                                {% endif %}
+                                {% if form_user.new_password2.errors %}
+                                <div class="form-group">
+                                    <label for="id_new_password2">{% translate 'Повторите новый пароль:' %}</label>
+                                    <input type="password" name="new_password2" class="form-control"
+                                           style="border:1px solid #ff0000"
+                                           id="id_new_password2">
+                                </div>
+                                {% for error in form_user.new_password2.errors %}
+                                <div class="invalid-feedback"><p style="color: red">{{error}}</p></div>
+                                {% endfor %}
+                                {% else %}
+                                <div class="form-group">
+                                    <label for="id_new_password2">{% translate 'Повторите новый пароль:' %}</label>
+                                    <input type="password" name="new_password2" class="form-control"
+                                           id="id_new_password2">
+                                </div>
+                                {% endif %}
+                                <div class="form-group">
+                                    <div class="Profile-btn">
+                                        <button class="btn btn_success" type="submit">{% translate 'Сохранить' %}
+                                        </button>
+                                    </div>
+                                    <div class="Profile-success">{{text_save}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

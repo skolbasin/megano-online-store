@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="Middle Middle_top">
+
+    <div class="Section Section_column Section_columnLeft">
+        <div class="wrap">
+
+            <div class="Section-content">
+                <div class="Profile">
+                    <div class="row">
+
+                        <div class="row-block">
+                            <div class="form-group">
+                                <label class="form-label">{% translate 'Аватар' %}
+                                </label>
+                                <div>
+                                    {% if seller.avatar %}
+                                    <img
+                                            src="{{ seller.avatar.url }}"
+                                            alt="Аватар магазина"
+                                            style="width: 110%; height: 100%; object-fit: contain;"
+                                    >
+                                    {% else %}
+                                    <div>
+                                        {% translate 'У магазина пока нет аватара' %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row-block">
+
+                        <div class="form-group">
+                            <label class="form-label">{% translate 'Название' %}</label>
+                            <div class="form-input">{{ seller.name }}</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>{% translate 'Телефон:' %}</label>
+                            <div class="form-group">
+                                <div class="form-input">{{ seller.phone }}</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{% translate 'E-mail:' %}</label>
+                                <div class="form-group">
+                                    <div class="form-input">{{ seller.email }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{% translate 'Описание:' %}</label>
+                                <div class="form-group">
+                                    <div class="form-input">{{ seller.description }}</div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{% translate 'Адрес:' %}</label>
+                                <div class="form-group">
+                                    <div class="form-input">{{ seller.address }}</div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="Middle Middle_top">
+    <div class="Section">
+        <div class="wrap">
+            <form class="form Cart" action="#" method="post">
+                {% for stock in top_stocks %}
+                <div class="Seller-products-header">
+                                {% translate 'Популярные товары' %}
+                            </div>
+                <div class="Cart-product">
+                    <div class="Cart-block Cart-block_row">
+                        <div class="Cart-block Cart-block_pict"><a class="Cart-pict" href="#"><img
+                                class="Cart-img" src="{{ stock.product.avatar.image.url }}" alt="image"></a>
+                        </div>
+                        <div class="Cart-block Cart-block_info"><a class="Cart-title" href="#">{{ stock.product.name}}</a>
+                            <div class="Cart-desc">{{ stock.product.description }}
+                            </div>
+                        </div>
+                        <div class="Cart-block Cart-block_price">
+                            <div class="Cart-price">{{ stock.price }}$
+                            </div>
+                        </div>
+                    </div>
+                    <div class="Cart-block Cart-block_row">
+
+                        <div class="Cart-block Cart-block_amount">
+                            <div class="Cart-amount">
+                                <div class="Amount">
+                                    <form method="post" action="{% url 'cart:cart_details' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id" value='{{ stock.product.id }}'>
+                                        <input type="hidden" name="count" value=1>
+                                        <input type="hidden" name="delete" value=True>
+                                        <button style="height: 55px; width: 55px;" type="submit">-</button>
+                                    </form>
+
+
+                                    <form method="post" action="{% url 'cart:cart_details' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="id" value='{{ stock.product.id }}'>
+                                        <input type="hidden" name="count" value=1>
+                                        <button style="height: 55px; width: 55px;" type="submit">+</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                {% empty %}
+                <h3>{% translate 'Здесь еще нет ни одного товара.' %}</h3>
+                {% endfor %}
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+{% endblock %}

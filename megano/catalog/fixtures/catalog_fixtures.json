@@ -1,0 +1,1157 @@
+[
+  {
+    "model": "catalog.banner",
+    "pk": 1,
+    "fields": {
+      "title": "Xiaomi RedmiBook 15",
+      "text": "В черном цвете, компактное охлаждающее устройство",
+      "link": "catalog/products/5/",
+      "active": true,
+      "image": "banners/Xiaomi_RedmiBook_15.jpg"
+    }
+  },
+  {
+    "model": "catalog.banner",
+    "pk": 5,
+    "fields": {
+      "title": "FinePower IC-H19",
+      "text": "В черном цвете, компактное охлаждающее устройство",
+      "link": "catalog/products/7/",
+      "active": true,
+      "image": "banners/FinePower_IC-H19.jpg"
+    }
+  },
+  {
+    "model": "catalog.banner",
+    "pk": 6,
+    "fields": {
+      "title": "POCO M5s",
+      "text": "Оформлен в корпусе яркого желтого цвета",
+      "link": "catalog/products/9/",
+      "active": true,
+      "image": "banners/POCO_M5s.jpg"
+    }
+  },
+  {
+    "model": "catalog.seller",
+    "pk": 1,
+    "fields": {
+      "name": "Ozon",
+      "description": "This is Ozon",
+      "phone": "+ 7 999-555-55-55",
+      "address": "Moscow, Lenina, 4",
+      "email": "ozon@.mail.ru",
+      "image": ""
+    }
+  },
+  {
+    "model": "catalog.seller",
+    "pk": 2,
+    "fields": {
+      "name": "MVideo",
+      "description": "This is MVideo",
+      "phone": "+ 7 999-444-55-55",
+      "address": "Tver, Artema, 4",
+      "email": "mvideo@.mail.ru",
+      "image": ""
+    }
+  },
+  {
+    "model": "catalog.seller",
+    "pk": 3,
+    "fields": {
+      "name": "WB",
+      "description": "This is WB",
+      "phone": "+ 7 999-333-55-55",
+      "address": "SPB, Nevskay, 4",
+      "email": "wb@.mail.ru",
+      "image": ""
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "title": "Ноутбуки",
+      "image": "",
+      "parent": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "title": "Подставки",
+      "image": "",
+      "parent": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "title": "Телефоны",
+      "image": "",
+      "parent": null
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "#best"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "#musthave"
+    }
+  },
+  {
+    "model": "catalog.tag",
+    "pk": 3,
+    "fields": {
+      "name": "#cool"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 1,
+    "fields": {
+      "image": "DEXP_Aquilon.jpg",
+      "alt": "DEXP_Aquilon"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 2,
+    "fields": {
+      "image": "Echips_Envy.jpg",
+      "alt": "Echips_Envy"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 3,
+    "fields": {
+      "image": "ASUS_ExpertBook_B1502CGA-BQ0084X.jpg",
+      "alt": "ASUS_ExpertBook_B1502CGA-BQ0084X"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 4,
+    "fields": {
+      "image": "HUAWEI_MateBook_D_15_BOD-WDI9.jpg",
+      "alt": "HUAWEI_MateBook_D_15_BOD-WDI9"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 5,
+    "fields": {
+      "image": "Xiaomi_RedmiBook_15.jpg",
+      "alt": "Xiaomi_RedmiBook_15"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 6,
+    "fields": {
+      "image": "Stand_DEXP_S3_grey.jpg",
+      "alt": "Stand_DEXP_S3_grey"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 7,
+    "fields": {
+      "image": "FinePower_IC-H19.jpg",
+      "alt": "FinePower_IC-H19"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 8,
+    "fields": {
+      "image": "Xiaomi_Redmi_Note_11_Pro_5G.jpg",
+      "alt": "Xiaomi_Redmi_Note_11_Pro_5G"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 9,
+    "fields": {
+      "image": "POCO_M5s.jpg",
+      "alt": "POCO_M5s"
+    }
+  },
+  {
+    "model": "catalog.productimage",
+    "pk": 10,
+    "fields": {
+      "image": "IIIF150_B1_Pro.jpg",
+      "alt": "IIIF150_B1_Pro"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "category": 1,
+      "avatar": 1,
+      "name": "DEXP_Aquilon",
+      "description": "Ноутбук DEXP Aquilon оборудован сенсорным NumPad, который упрощает ввод числовой информации. Осуществляйте навигацию между несколькими окнами и не отказывайтесь от использования требовательных приложений. Высокую скорость работы будет поддерживать 2-ядерный процессор Intel Celeron N4020. Видеокарта Intel UHD Graphics 600 улучшит качество графики при обработке материалов в редакторах. Ноутбуку DEXP Aquilon вы доверите трансляцию кинолент и роликов. Экран диагональю 14.1 дюйм сконструирован по технологии IPS. Ее основная задача заключается в усилении контрастности изображений и расширении углов обзора. Синхронизация внешней периферии займет не более нескольких минут. Достаточно воспользоваться интерфейсом Bluetooth 4.2. Ускорить передачу файлов с накопителя позволит разъем USB 3.2.",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": false,
+      "preview": null,
+      "characteristics": {
+        "Тип": "Ноутбук",
+        "Модель": "DEXP_Aquilon",
+        "Год релиза": "2022",
+        "Цвет": "серебристый",
+        "Тип экрана": "IPS",
+        "Диагональ": "14.1\"",
+        "Разрешение": "Full HD (1920x1080)",
+        "Процессор": "Intel Celeron N4020",
+        "Модель встроенной видеокарты": "Intel UHD Graphics 600",
+        "Общий объем твердотельных накопителей(SSD)": "128 ГБ"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "category": 1,
+      "avatar": 2,
+      "name": "Echips_Envy",
+      "description": "Ноутбук Echips Envy выполнен в пластиковом корпусе компактных размеров с серебристой расцветкой. Стильный и производительный, он соответствует мобильному образу жизни. Аппаратная платформа с процессором Intel Celeron J4125, 8 ГБ оперативной памяти и накопителем SSD 240 ГБ позволяет продуктивно справляться с простыми задачами. На экране 14 дюйма IPS FullHD с матовым антибликовым покрытием отображается качественное изображение. Клавиатура и тачпад гарантируют удобство работы в программах. Для подключения к устройствам реализованы беспроводные интерфейсы Wi-Fi и Bluetooth, порты USB, видеовыход mini HDMI, разъемы аудио. Литий-ионный аккумулятор емкостью 4500 мА*ч позволяет Echips Envy функционировать без подзарядки до 5 часов.",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": false,
+      "preview": null,
+      "characteristics": {
+        "Тип": "Ноутбук",
+        "Модель": "Echips_Envy",
+        "Год релиза": "2021",
+        "Цвет": "серебристый",
+        "Тип экрана": "IPS",
+        "Диагональ": "14\"",
+        "Разрешение": "Full HD (1920x1080)",
+        "Процессор": "Intel Celeron N4125",
+        "Модель встроенной видеокарты": "Intel UHD Graphics 600",
+        "Общий объем твердотельных накопителей(SSD)": "240 ГБ"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "category": 1,
+      "avatar": 3,
+      "name": "ASUS_ExpertBook_B1502CGA-BQ0084X",
+      "description": "Ноутбук ASUS ExpertBook B1502CGA-BQ0084X способен справляться с несложными компьютерными задачами: редактирование документов, поиск информации в Интернете, просмотр видео. В основе аппаратной платформы содержится процессор Intel Processor N100, который функционирует совместно с 4 ГБ оперативной памяти. Это обеспечивает производительность и энергоэффективность системы. Портативный компьютер поставляется с ОС Windows 11 Pro. Корпус ноутбука ASUS ExpertBook B1502CGA-BQ0084X создан в соответствии со стандартами прочности и износостойкости MIL-STD-810H. Экран 15.6\" IPS FullHD с антибликовой поверхностью обеспечивает детализированное изображение и комфортный просмотр. Мембранная клавиатура с цифровым блоком и тачпад гарантируют удобный ввод данных. Для безопасного входа предусмотрены веб-камера с защитной шторкой, сканер отпечатков пальцев и функция распознавания лица.",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": false,
+      "preview": null,
+      "characteristics": {
+        "Тип": "Ноутбук",
+        "Модель": "ASUS_ExpertBook_B1502CGA-BQ0084X",
+        "Год релиза": "2023",
+        "Цвет": "черный",
+        "Тип экрана": "IPS",
+        "Диагональ": "15.6\"",
+        "Разрешение": "Full HD (1920x1080)",
+        "Процессор": "Intel Processor N100",
+        "Модель встроенной видеокарты": "Intel UHD Graphics",
+        "Общий объем твердотельных накопителей(SSD)": "128 ГБ"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "category": 1,
+      "avatar": 4,
+      "name": "HUAWEI_MateBook_D_15_BOD-WDI9",
+      "description": "Ноутбук HUAWEI MateBook D 15 BOD-WDI9 в алюминиевом корпусе серого цвета оснащен 2-ядерным процессором Intel Core i3-1115G4 и 8 ГБ оперативной памяти. Аппаратная оснащение выступает гарантом быстрой загрузки приложений и навигации между окнами. ",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": true,
+      "preview": null,
+      "characteristics": {
+        "Тип": "Ноутбук",
+        "Модель": "HUAWEI_MateBook_D_15_BOD-WDI9",
+        "Год релиза": "2023",
+        "Цвет": "серый",
+        "Тип экрана": "IPS",
+        "Диагональ": "15.6\"",
+        "Разрешение": "Full HD (1920x1080)",
+        "Процессор": "Intel Core i3-1115G4",
+        "Модель встроенной видеокарты": "Intel UHD Graphics",
+        "Общий объем твердотельных накопителей(SSD)": "256 ГБ"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "category": 1,
+      "avatar": 5,
+      "name": "Xiaomi_RedmiBook_15",
+      "description": "Ноутбук Xiaomi RedmiBook 15 может похвастаться наличием 15.6-дюймового экрана, вся площадь которого заполнится яркими изображениями широкого спектра оттенков. Основу составила технология TN+film, которая увеличивает углы обзора и способствует быстрой смене кадров при насыщенных эпизодах. ",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": true,
+      "preview": null,
+      "characteristics": {
+        "Тип": "Ноутбук",
+        "Модель": "Xiaomi_RedmiBook_15",
+        "Год релиза": "2022",
+        "Цвет": "серый",
+        "Тип экрана": "TN+film",
+        "Диагональ": "15.6\"",
+        "Разрешение": "Full HD (1920x1080)",
+        "Процессор": "Intel Core i3-1115G4",
+        "Модель встроенной видеокарты": "Intel UHD Graphics",
+        "Общий объем твердотельных накопителей(SSD)": "256 ГБ"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "category": 2,
+      "avatar": 6,
+      "name": "Stand_DEXP_S3_grey",
+      "description": "Подставка для ноутбука DEXP S-3 станет отличным выбором для тех, кто много работает за ноутбуком и хочет обеспечить комфортный температурный режим внутри его корпуса. ",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": false,
+      "preview": null,
+      "characteristics": {
+        "Год выпуска": "2023",
+        "Максимально поддерживаемый вес": "3 кг",
+        "Максимальная диагональ ноутбука (дюйм)": "15.6\"",
+        "Материал": "Эко-кожа",
+        "Охлаждение": "Нет"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+      "category": 2,
+      "avatar": 7,
+      "name": "FinePower_IC-H19",
+      "description": "Подставка для ноутбука FinePower IC-H19 в черном цвете представляет собой компактное охлаждающее устройство, которое совместимо с ноутбуками размером до 14\". ",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": true,
+      "preview": null,
+      "characteristics": {
+        "Год выпуска": "2022",
+        "Максимально поддерживаемый вес": "2 кг",
+        "Максимальная диагональ ноутбука (дюйм)": "14\"",
+        "Материал": "Эко-кожа",
+        "Охлаждение": "Да"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+      "category": 3,
+      "avatar": 8,
+      "name": "Xiaomi_Redmi_Note_11_Pro_5G",
+      "description": "Смартфон Xiaomi Redmi Note 11 Pro 5G со встроенной памятью объемом 64 ГБ уже стал известен благодаря невероятной производительности и способности делать фото обескураживающего качества с камерой разрешением до 108 Мп. Для того, кто хочет получить от своего мобильного максимум, производитель установил в него процессор Qualcomm Snapdragon 695 на 8 ядер, который сочетается с 6 ГБ оперативной памяти и графическим ускорителем Adreno 619.",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": true,
+      "preview": null,
+      "characteristics": {
+        "Год выпуска": "2022",
+        "Количество физических SIM-карт": "2",
+        "Диагональ экрана (дюйм)": "6.67\"",
+        "Разрешение экрана": "2400x1080",
+        "Тип матрицы": "AMOLED"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 9,
+    "fields": {
+      "category": 3,
+      "avatar": 9,
+      "name": "POCO_M5s",
+      "description": "Смартфон POCO M5s 128 ГБ оформлен в корпусе яркого желтого цвета, что делает его привлекательным спутником. Устройство оснащено безрамочным дисплеем 6.43 дюйма. Панель AMOLED высокого разрешения воспроизводит реалистичное изображение с насыщенными и яркими цветами. ",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": false,
+      "preview": null,
+      "characteristics": {
+        "Год выпуска": "2022",
+        "Количество физических SIM-карт": "2",
+        "Диагональ экрана (дюйм)": "6.43\"",
+        "Разрешение экрана": "2400x1080",
+        "Тип матрицы": "AMOLED"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 10,
+    "fields": {
+      "category": 3,
+      "avatar": 10,
+      "name": "IIIF150_B1_Pro",
+      "description": "Смартфон IIIF150 B1 Pro оснащен 8-ядерным процессором MediaTek Helio G37 и 6 ГБ оперативной памяти. Аппаратная часть продемонстрирует способность к молниеносному отклику на запросы пользователя и загрузке приложений. Трехмодульная камера с тройной светодиодной вспышкой распознает объекты в условиях кромешной темноты, гарантируя высокую четкость кадров. ",
+      "manufacturer": "Китай",
+      "active": true,
+      "limited_edition": false,
+      "preview": null,
+      "characteristics": {
+        "Год выпуска": "2021",
+        "Количество физических SIM-карт": "1",
+        "Диагональ экрана (дюйм)": "6.5\"",
+        "Разрешение экрана": "2400x1080",
+        "Тип матрицы": "IPS"
+      },
+      "tag": [
+        1,
+        2,
+        3
+      ],
+      "image": []
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 1,
+    "fields": {
+      "seller": 1,
+      "product": 1,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 2,
+    "fields": {
+      "seller": 1,
+      "product": 1,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 3,
+    "fields": {
+      "seller": 2,
+      "product": 1,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 4,
+    "fields": {
+      "seller": 2,
+      "product": 1,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 5,
+    "fields": {
+      "seller": 3,
+      "product": 1,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "21000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 6,
+    "fields": {
+      "seller": 3,
+      "product": 1,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "21000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 7,
+    "fields": {
+      "seller": 1,
+      "product": 2,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 8,
+    "fields": {
+      "seller": 1,
+      "product": 2,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 9,
+    "fields": {
+      "seller": 2,
+      "product": 2,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 10,
+    "fields": {
+      "seller": 2,
+      "product": 2,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 11,
+    "fields": {
+      "seller": 3,
+      "product": 2,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "21000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 12,
+    "fields": {
+      "seller": 3,
+      "product": 2,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "21000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 13,
+    "fields": {
+      "seller": 1,
+      "product": 3,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 14,
+    "fields": {
+      "seller": 1,
+      "product": 3,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 15,
+    "fields": {
+      "seller": 2,
+      "product": 3,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 16,
+    "fields": {
+      "seller": 2,
+      "product": 3,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "24000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 17,
+    "fields": {
+      "seller": 3,
+      "product": 3,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 18,
+    "fields": {
+      "seller": 3,
+      "product": 3,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 19,
+    "fields": {
+      "seller": 1,
+      "product": 4,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 20,
+    "fields": {
+      "seller": 1,
+      "product": 4,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 21,
+    "fields": {
+      "seller": 2,
+      "product": 4,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 22,
+    "fields": {
+      "seller": 2,
+      "product": 4,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 23,
+    "fields": {
+      "seller": 3,
+      "product": 4,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "23000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 24,
+    "fields": {
+      "seller": 3,
+      "product": 4,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "23000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 25,
+    "fields": {
+      "seller": 1,
+      "product": 5,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 26,
+    "fields": {
+      "seller": 1,
+      "product": 5,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 27,
+    "fields": {
+      "seller": 2,
+      "product": 5,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 28,
+    "fields": {
+      "seller": 2,
+      "product": 5,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 29,
+    "fields": {
+      "seller": 3,
+      "product": 5,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 30,
+    "fields": {
+      "seller": 3,
+      "product": 5,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "22000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 31,
+    "fields": {
+      "seller": 1,
+      "product": 6,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2700.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 32,
+    "fields": {
+      "seller": 1,
+      "product": 6,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2700.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 33,
+    "fields": {
+      "seller": 2,
+      "product": 6,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2400.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 34,
+    "fields": {
+      "seller": 2,
+      "product": 6,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2400.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 35,
+    "fields": {
+      "seller": 3,
+      "product": 6,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2500.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 36,
+    "fields": {
+      "seller": 3,
+      "product": 6,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2500.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 37,
+    "fields": {
+      "seller": 1,
+      "product": 7,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 38,
+    "fields": {
+      "seller": 1,
+      "product": 7,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 39,
+    "fields": {
+      "seller": 2,
+      "product": 7,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2400.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 40,
+    "fields": {
+      "seller": 2,
+      "product": 7,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2400.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 41,
+    "fields": {
+      "seller": 3,
+      "product": 7,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2400.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 42,
+    "fields": {
+      "seller": 3,
+      "product": 7,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "2400.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 43,
+    "fields": {
+      "seller": 1,
+      "product": 8,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "16000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 44,
+    "fields": {
+      "seller": 2,
+      "product": 8,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "20000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 45,
+    "fields": {
+      "seller": 3,
+      "product": 8,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "18000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 46,
+    "fields": {
+      "seller": 1,
+      "product": 9,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "16000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 47,
+    "fields": {
+      "seller": 2,
+      "product": 9,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "16000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 48,
+    "fields": {
+      "seller": 3,
+      "product": 9,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "16000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 49,
+    "fields": {
+      "seller": 1,
+      "product": 10,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "15000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 50,
+    "fields": {
+      "seller": 2,
+      "product": 10,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "17000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  },
+  {
+    "model": "catalog.stock",
+    "pk": 51,
+    "fields": {
+      "seller": 3,
+      "product": 10,
+      "quantity": 10,
+      "quantity_sold": 0,
+      "price": "16000.00",
+      "create_date": "2023-12-27",
+      "free_shipping": false
+    }
+  }
+]

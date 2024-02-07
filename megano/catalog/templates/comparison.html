@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<div class="Middle">
+    <div class="wrap">
+        <div class="Product">
+
+            {% if comparison_list %}
+            <form method="post" class="Compare-clear-form" action="{% url 'catalog:clear_comparison' %}">
+                {% csrf_token %}
+                <div>
+                    <input hidden name="clear" value="true">
+                    <span class="Compare-clear-title">
+                                {% translate 'Очистить список сравнения' %}
+                            </span>
+                    <button type="submit" class="btn_primary">x</button>
+                </div>
+            </form>
+            {% if not flag_not_matching %}
+
+            <form method="post" class="Compare-clear-form">
+                {% csrf_token %}
+                <div class="Compare-clear-form">
+                            <span class="Compare-clear-title">
+                                {% translate 'Только различающиеся характеристики' %}
+                            </span>
+                    {% if not flag %}
+                    <input type="checkbox" id="flag" name="flag">
+                    {% else %}
+                    <input type="checkbox" id="flag" name="flag" checked/>
+                    {% endif %}
+                    <button type="submit" class="btn_primary">{% translate 'Применить' %}</button>
+                    {% endif %}
+                </div>
+            </form>
+
+            {% endif %}
+
+            <div class="ProductCard">
+
+                {% if comparison_list|length > 1 %}
+                {% for product, price in comparison_list %}
+                <div class="ProductCard-desc">
+                    <div class="ProductCard-header">
+                        <h2 class="ProductCard-title">
+                            <a href="{% url 'catalog:product_detail' pk=product.id %}" class="ProductCard-link">
+                                {{ product.name }}
+                            </a>
+                        </h2>
+                        <div class="ProductCard-look">
+                            <div class="ProductCard-photo Product-image-preview">
+                                <a href="{% url 'catalog:product_detail' pk=product.id %}" class="ProductCard-link">
+                                    <img src="{{product.avatar.image.url}}" alt="{{product.avatar.name}}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="Tabs Tabs_default">
+                            <div class="Tabs-wrap">
+                                <div class="Tabs-block" id="description">
+                                    <div class="table">
+                                        <table>
+                                            <tr>
+                                                <th class="hed">
+                                                    {% translate 'Характеристика' %}
+                                                </th>
+                                                <th class="hed">
+                                                    {% translate 'Значение' %}
+                                                </th>
+                                            </tr>
+                                            {% if not flag_not_matching %}
+                                            {% for characteristic, value in product.characteristics.items %}
+                                            <tr>
+                                                <div>
+                                                    {% if not flag %}
+                                                    <td
+                                                            {% if characteristic not in matched_items %}
+                                                            class="comparis"
+                                                            {% endif %}>
+                                                        <b>{{ characteristic }}</b>
+                                                    </td>
+
+                                                    <td
+                                                            {% if characteristic not in matched_items %}
+                                                            class="comparis"
+                                                            {% endif %}>
+                                                        {{ value }}
+                                                    </td>
+                                                    {% else %}
+
+                                                    {% if characteristic not in matched_items %}
+                                                    <td class="comparis">
+                                                        <b>{{ characteristic }}</b>
+                                                    </td>
+
+                                                    <td class="comparis">
+                                                        {{ value }}
+                                                    </td>
+                                                    {% endif %}
+                                                    {% endif %}
+
+                                                </div>
+                                            </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                            <div>
+                                                {% translate 'Не сравнивай не сравнимое, ибо оно не сравнится никогда!' %}
+                                            </div>
+                                            {% endif %}
+                                        </table>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="ProductCard-info">
+                        <div class="ProductCard-cost">
+                            <div class="ProductCard-price">
+                                {{ price }}₽
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div>
+                    {% translate 'Недостаточно данных для сравнения' %}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="Middle Middle_top">
+    <div class="Middle-top">
+        <div class="wrap">
+            <div class="Middle-header">
+                <h1 class="Middle-title">{% translate 'Оплата:' %} {{message}}
+                </h1>
+                <ul class="breadcrumbs Middle-breadcrumbs">
+                    <li class="breadcrumbs-item"><a href="index.html">{% translate 'home' %}</a>
+                    </li>
+                    <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% translate 'Оплата' %}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="wrap">
+            <form class="form Payment" method="post">
+                {% csrf_token %}
+                <header class="Section-header Section-header_sm">
+                    <h2 class="Section-title">{% translate 'Способ оплаты' %}
+                    </h2>
+                </header>
+                <div class="form-group">
+                    <select name="payment_method" id="payment_method_input" required="required">
+                        <option value="EMPTY">{% translate 'Выберите вариант оплаты' %}</option>
+                        <option value="CARD">{% translate 'Онлайн картой' %}</option>
+                        <option value="SOMEONE_ACCOUNT">{% translate 'Онлайн картой с чужего счета' %}</option>
+                    </select>
+                </div>
+                <div class="Payment-card">
+                    <div class="form-group">
+                        <label class="form-label">{% translate 'Номер карты' %}
+                        </label>
+                        <input class="form-input Payment-bill" id="card_number" name="card_number" type="text"
+                               placeholder="9999 9999" data-mask="9999 9999" data-validate="require pay"/>
+                    </div>
+                </div>
+
+                <div class="Payment-pay">
+                    <button class="btn btn_primary btn_lg" type="submit">
+                        {% translate 'Оплатить' %}
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

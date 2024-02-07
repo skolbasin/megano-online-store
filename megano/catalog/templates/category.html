@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="Middle Middle_top">
+    <div class="Middle-top">
+        <div class="wrap">
+            <div class="Middle-header">
+                <h1 class="Middle-title">{% translate 'Каталог' %}</h1>
+                <ul class="breadcrumbs Middle-breadcrumbs">
+            <li class="breadcrumbs-item"><a href="{% url 'main' %}">{% translate 'Главная' %}</a>
+            </li>
+            <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% translate 'Каталог' %}</span>
+            </li>
+          </ul>
+            </div>
+        </div>
+    </div>
+<div class="Section">
+        <div class="wrap">
+            <div class="Cards Cards_blog">
+                {% if categories %}
+                    {% for category in categories %}
+                        <div class="Card">
+                            <a class="Card-picture" href="{% url 'catalog' category.image %}">
+                            <img src="{{ category.category_product.first.main_image.file.url }}" alt="{{ product.main_image.filename }}"/></a>
+                            <div class="Card-content">
+                                <strong class="Card-title">
+                                    <a href="{% url 'catalog' category.id %}">{{ category.name }}</a>
+                                </strong>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p>{% translate 'Категория пуста' %}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,220 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+<div class="Middle">
+    <div class="Section">
+
+        <div class="Header-slider">
+            <div class="Slider Slider_main">
+                <div class="Slider-box">
+                    {% for slider in active_sliders %}
+                    <div class="Slider-item">
+                        <div class="Slider-content">
+                            <div class="row">
+                                <div class="row-block">
+                                    <strong class="Slider-title">{{ slider.title }}<span class="text_primary"></span>
+                                    </strong>
+                                    <div class="Slider-text">{{ slider.text }}
+                                    </div>
+                                    <div class="Slider-footer"><a class="btn btn_primary" href="{{ slider.link }}">{% translate 'Get Started' %} </a>
+                                    </div>
+                                </div>
+                                <div class="row-block">
+                                    <div class="Slider-img"><img src="{{ slider.image.url }}"
+                                                                 alt="slider.png"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="Slider-navigateWrap">
+                    <div class="Slider-navigate">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="wrap">
+            <header class="Section-header">
+                <h2 class="Section-title"> {% translate 'Горячие предложения' %}
+                </h2>
+            </header>
+            <div class="BannersHome">
+                {% for hot_offer in hot_offers %}
+                <a class="BannersHomeBlock" href="{% url 'catalog:product_detail' pk=hot_offer.product.id %}">
+                    <div class="BannersHomeBlock-row">
+                        <div class="BannersHomeBlock-block">
+                            <strong class="BannersHomeBlock-title"> {{ hot_offer.product.name }}
+                            </strong>
+                            <div class="BannersHomeBlock-content"><span class="BannersHomeBlock-price">{{ hot_offer.price }}₽</span>
+                            </div>
+                        </div>
+                        <div class="BannersHomeBlock-block">
+                            <div class="BannersHomeBlock-img"><img src='{{ hot_offer.product.avatar.image.url }}'
+                                                                   alt="videoca.png"/>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="Section Section_column Section_columnLeft Section_columnDesktop">
+            <div class="wrap">
+                <div class="Section-column">
+                    <div class="Section-columnSection Section-columnSection_mark">
+                        <header class="Section-columnHeader">
+                            <strong class="Section-columnTitle">{% translate 'ОГРАНИЧЕННЫЕ ПРЕДЛОЖЕНИЯ' %}
+                            </strong>
+                        </header>
+                        <div class="Card"><a class="Card-picture" href="{% url 'catalog:product_detail' pk=product_day.product.id %}"><img src='{{ product_day.product.avatar.image.url }}'
+                                                                                alt="card.jpg"/></a>
+                            <div class="Card-content">
+                                <strong class="Card-title"><a  href="{% url 'catalog:product_detail' pk=product_day.product.id %}"> {{ product_day.product.name }}</a>
+                                </strong>
+                                <div class="Card-description">
+                                    <div class="Card-cost"><span
+                                            class="Card-priceOld">{{ product_day.price }}₽</span><span
+                                            class="Card-price">{{ product_day_new_price }}₽ </span>
+                                    </div>
+                                    <div class="Card-category"> {{ product_day.product.category }}
+                                    </div>
+                                </div>
+                                <div class="CountDown" data-date="{{ today }}">
+                                    <div class="CountDown-block">
+                                        <div class="CountDown-wrap">
+                                            <div class="CountDown-days">
+                                            </div>
+                                            <span class="CountDown-label">{% translate 'days' %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="CountDown-block">
+                                        <div class="CountDown-wrap">
+                                            <div class="CountDown-hours">
+                                            </div>
+                                            <span class="CountDown-label">{% translate 'hours' %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="CountDown-block">
+                                        <div class="CountDown-wrap">
+                                            <div class="CountDown-minutes">
+                                            </div>
+                                            <span class="CountDown-label">{% translate 'mins' %}</span>
+                                        </div>
+                                    </div>
+                                    <div class="CountDown-block">
+                                        <div class="CountDown-wrap">
+                                            <div class="CountDown-secs">
+                                            </div>
+                                            <span class="CountDown-label">{% translate 'secs' %}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Section-content">
+                    <header class="Section-header">
+                        <h2 class="Section-title">{% translate 'Популярные товары' %}
+                        </h2>
+                    </header>
+                    <div class="Cards">
+                        {% for top_product in top_products_4 %}
+                        <div class="Card"><a class="Card-picture"  href="{% url 'catalog:product_detail' pk=top_product.id %}"><img src="{{ top_product.avatar.image.url }}"
+                                                                                alt="card.jpg"/></a>
+                            <div class="Card-content">
+                                <strong class="Card-title"><a  href="{% url 'catalog:product_detail' pk=top_product.id %}">{{ top_product.name }}</a>
+                                </strong>
+                                <div class="Card-description">
+                                    <div class="Card-cost"><span class="Card-price">{{ top_product.price|add:0 }}₽</span>
+                                    </div>
+                                    <div class="Card-category">{{ top_product.category }}
+                                    </div>
+                                    <div class="Card-hover">
+                                        <a class="Card-btn"  href="">
+                                            <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        {% for top_product in top_products_5_6 %}
+                        <div class="Card hide_md"><a class="Card-picture" href="{% url 'catalog:product_detail' pk=top_product.id %}"><img
+                                src="{{ top_product.avatar.image.url }}"
+                                alt="card.jpg"/></a>
+                            <div class="Card-content">
+                                <strong class="Card-title"><a href="{% url 'catalog:product_detail' pk=top_product.id %}">{{ top_product.name }}</a>
+                                </strong>
+                                <div class="Card-description">
+                                    <div class="Card-cost"><span class="Card-price">{{ top_product.price|add:0 }}₽</span>
+                                    </div>
+                                    <div class="Card-category">{{ top_product.category }}
+                                    </div>
+                                    <div class="Card-hover">
+                                        <a class="Card-btn"  href="">
+                                        <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+                                    </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Section Section_column Section_columnRight">
+            <div class="wrap">
+                <div class="Section-content">
+                    <div class="Slider Slider_carousel">
+                        <header class="Section-header Section-header_close">
+                            <h2 class="Section-title">{% translate 'Ограниченный тираж' %}
+                            </h2>
+                            <div class="Section-control">
+                                <div class="Slider-navigate">
+                                </div>
+                            </div>
+                        </header>
+                        <div class="Slider-box Cards">
+                            {% for limited_edition in limited_editions %}
+                            <div class="Slider-item">
+                                <div class="Slider-content">
+                                    <div class="Card">
+
+                                        <a class="Card-picture" href="{% url 'catalog:product_detail' pk=limited_edition.product.id %}">
+                                            <img src="{{ limited_edition.product.avatar.image.url }}" alt="card.jpg"/>
+                                        </a>
+                                        <div class="Card-content">
+                                            <strong class="Card-title"><a href="">{{ limited_edition.product.name}}</a>
+                                            </strong>
+                                            <div class="Card-description">
+                                                <div class="Card-cost"><span class="Card-price">{{ limited_edition.price }}₽</span>
+                                                </div>
+                                                <div class="Card-category"> {{ limited_edition.product.category }}
+                                                </div>
+                                                <div class="Card-hover">
+                                                    <a class="Card-btn" href="">
+                                                        <img src="{% static 'assets/img/icons/card/cart.svg' %}" alt="cart.svg"/>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

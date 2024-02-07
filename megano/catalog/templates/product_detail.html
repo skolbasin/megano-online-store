@@ -1,0 +1,320 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+<div class="Middle Middle_top">
+    <div class="Section">
+        <div class="wrap">
+            <div class="Product">
+                <div class="ProductCard">
+                    <div class="ProductCard-look">
+                        <div class="ProductCard-photo">
+                            <img src="{{ product.avatar.image.url }}"
+                                 alt="{{ product.avatar.alt }}">
+                        </div>
+                        <div class="ProductCard-picts">
+                            <a class="ProductCard-pict ProductCard-pict_ACTIVE"
+                               href="{{ product.avatar.image.url }}"><img
+                                    src="{{ product.avatar.image.url }}"
+                                    alt="{{ product.avatar.alt }}"></a>
+                            {% for image in images %}
+                            <a class="ProductCard-pict"
+                               href="{{ image.image.url }}"><img
+                                    src="{{ image.image.url }}"
+                                    alt="{{ image.alt }}"></a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="ProductCard-desc">
+                        <div class="ProductCard-header">
+                            <h2 class="ProductCard-title">{{ product.name }}
+                            </h2>
+                            <div class="ProductCard-info">
+                                <div class="ProductCard-cost">
+                                    <div class="ProductCard-price">{{ price }}₽
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ProductCard-text">
+                            <ul>
+                                <li>{{ product.manufacturer }}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ProductCard-cart">
+                            {% if price_id != 1 %}
+                            <div class="ProductCard-cartElement">
+
+                                <form method="post" action="{% url 'cart:add_to_cart' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="stock_id" value='{{ product.stocks.first.id }}'>
+                                    <button class="btn btn_primary" type="submit">
+                                        <img class="btn-icon" src="{% static 'assets/img/icons/card/cart_white.svg' %}"
+                                             alt="cart_white.svg">{% translate 'Купить' %}
+                                    </button>
+                                </form>
+                            </div>
+                            {% else %}
+                            <div></div>
+                            {% endif %}
+                            <div id="modal_open" class="my_modal">
+                                <div class="my_modal-dialog">
+                                    <div class="my_modal-content">
+                                        <div class="my_modal-header">
+                                            <p class="my_modal-title">{% translate 'Поздравляем!' %}</p>
+                                            <a href="#"
+                                               title="Закрыть модальное окно"
+                                               class="close">×</a>
+                                        </div>
+                                        <div class="my_modal-body">
+                                            <p>{% translate 'Товар успешно добавлен в корзину!' %}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ProductCard-footer">
+                            <div class="ProductCard-tags">
+                                <strong class="ProductCard-tagsTitle">{% translate 'Тэги:' %}
+                                    {% if product.tag.name %}
+                                    {{ product.tag.name }}
+                                    {% else %}
+                                    {% translate 'Отсутствуют' %}
+                                    {% endif %}</strong>
+                            </div>
+                        </div>
+                        <div class="ProductCart-add-to-comparison">
+                            {% if in_comparison_list %}
+                            <span class="add-to-comparison-title">{% translate 'в списке сравнения' %}</span>
+                            <button class="ProductCard-add-button added-to-comparison"
+                                    id="add-to-comparison">
+                                {% else %}
+                                <form method="post" action="{% url 'catalog:add_product_to_comparison' %}">
+                                    {% csrf_token %}
+                                    <span class="add-to-comparison-title">{% translate 'добавить в список сравнения' %}</span>
+                                    <input type="hidden" name="product_id" value='{{ product.id }}'>
+                                    <button class="ProductCard-add-button add-to-comparison" id="add-to-comparison"
+                                            type="submit">
+                                    </button>
+                                </form>
+                                {% endif %}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="Tabs Tabs_default">
+                    <div class="Tabs-links">
+                        <a class="Tabs-link_ACTIVE Tabs-link" href="#description">
+                            <span>{% translate 'Описание' %}</span>
+                        </a>
+                        <a class="Tabs-link" href="#sellers">
+                            <span>{% translate 'Продавцы' %}</span>
+                        </a>
+                        <a class="Tabs-link" href="#addit">
+                            <span>{% translate 'Характеристики' %}</span>
+                        </a>
+                        <a class="Tabs-link" href="#reviews">
+                            <span>{% translate 'Отзывы' %} ({{ reviews|length }})</span>
+                        </a>
+                    </div>
+                    <div class="Tabs-wrap">
+                        <div class="Tabs-block" id="description">
+                            <ul>
+                                <li>
+                                    {{ product.description }}
+                                </li>
+                            </ul>
+                            <div class="clearfix">
+                            </div>
+                            <div class="table">
+                                <table>
+                                    <tr>
+                                        <th>{% translate 'Характеристика' %}
+                                        </th>
+                                        <th>{% translate 'Значение' %}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>{% translate 'Тип устройства' %}
+                                        </td>
+                                        <td>{{ product.category }}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="Tabs-block" id="sellers">
+                            <div class="Section-content">
+                                <div class="Orders">
+                                    {% for stock in stocks %}
+                                    <div class="Order Order_anons">
+                                        <div class="Order-personal">
+                                            <div class="row">
+
+                                                <div class="row-block">
+                                                    <a class="Order-title"
+                                                       href="{% url 'catalog:seller_detail' pk=stock.seller.pk %}">
+                                                        {{ stock.seller.name }}
+                                                    </a>
+                                                    <form method="post" action="{% url 'cart:add_to_cart' %}">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="stock_id" value='{{ product.stocks.first.id }}'>
+                                                        <div class="ProductCard-cartElement"
+                                                        style="margin-top: 10px;">
+                                                    <button class="btn btn_primary" type="submit">
+                                                        <img class="btn-icon" src="{% static 'assets/img/icons/card/cart_white.svg' %}"
+                                                             alt="cart_white.svg">{% translate 'Купить' %}
+                                                    </button>
+                                                            </div>
+                                                </form>
+                                                </div>
+                                                <div class="row-block">
+
+                                                    <div class="Order-info">
+                                                        <div class="Order-infoType">{% translate 'Стоимость:' %}
+                                                        </div>
+                                                        <div class="Order-infoContent"><span class="Order-price">{{ stock.price }}$</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="Tabs-block" id="addit">
+                            <div class="Product-props">
+                                {% for key, val in product.characteristics.items %}
+                                <div class="Product-prop">
+                                    <strong>{{ key }}</strong>
+                                    <span>{{ val }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="Tabs-block" id="reviews">
+                            <header class="Section-header">
+                                <h3 class="Section-title">{{ reviews|length }} {% translate 'отзыв' %}
+                                </h3>
+                            </header>
+                            <div class="Comments">
+                                {% for review in reviews %}
+                                <div class="Comment">
+                                    <div class="Comment-column Comment-column_pict">
+                                        <div class="Comment-avatar">
+                                        </div>
+                                    </div>
+                                    <div class="Comment-column">
+                                        <header class="Comment-header">
+                                            <div>
+                                                <strong class="Comment-title">{{ review.profile.user.first_name }} {{
+                                                    review.profile.user.last_name }}
+                                                </strong><span
+                                                    class="Comment-date">{{ review.created_at }}</span>
+                                            </div>
+                                        </header>
+                                        <div class="Comment-content">{{ review.text }}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <header class="Section-header Section-header_product">
+                                <h3 class="Section-title">{% translate 'Добавить отзыв' %}
+                                </h3>
+                            </header>
+                            <div class="Tabs-addComment">
+                                <form class="form"
+                                      action="{% url 'catalog:review_add' product.id %}"
+                                      method="post">
+                                    <div class="form-group">
+                                        {{ review_form.text }}
+                                        {% csrf_token %}
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn_muted"
+                                                type="submit">{% translate 'Отправить отзыв' %}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% if not in_comparison_list %}
+<script>
+            const add_button = document.querySelector('#add-to-comparison')
+            const title = document.querySelector('.add-to-comparison-title')
+            add_button.addEventListener('click', add_button_click)
+            const csrf = document.getElementsByName("csrfmiddlewaretoken")[0].value
+
+            function getCookie(name) {
+                let cookieValue = null
+                if (document.cookie && document.cookie !== '') {
+                    let cookies = document.cookie.split(';');
+                    for (let i = 0; i < cookies.length; i++) {
+                        let cookie = cookies[i].trim();
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+
+            }
+
+            async function add_to_comparison() {
+                try {
+                    const headers = {
+                        "X-CSRFToken": csrf
+                    }
+                    let language = getCookie('django_language')
+                    if (language) {
+                        language = `/${language}`
+                    }
+                    const data = new FormData()
+                    data.append('product_id', {{ product.pk }})
+                    data.append('csrfmiddlewaretoken', csrf)
+                    const url = `${language}/catalog/comparison/add/`
+                    const response = await fetch(url,
+                        {
+                            method: 'POST',
+                            credentials: 'same-origin',
+                            body: data,
+                            headers: headers
+                        }
+                    )
+                    if (response.ok) {
+                        console.log(await response.json())
+                        return true
+                    }
+                } catch (err) {
+                    console.log(err)
+                    return false
+                }
+            }
+
+            async function add_button_click() {
+                const result = await add_to_comparison()
+                if (result === true) {
+                    add_button.classList.remove('add-to-comparison')
+                    add_button.classList.add('added-to-comparison')
+                    title.innerText = "в списке сравнения"
+                }
+            }
+
+
+
+</script>
+{% endif %}
+{% endblock %}

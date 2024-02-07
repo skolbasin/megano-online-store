@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+                    <h1 class="Middle-title">{% translate 'Профиль' %}
+                    </h1>
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="/">{% translate 'home' %}</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% translate 'Профиль' %}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section Section_column Section_columnLeft">
+            <div class="wrap">
+                <div class="Section-column">
+                    <div class="Section-columnSection">
+                        <header class="Section-header">
+                            <strong class="Section-title">{% translate 'Навигация' %}
+                            </strong>
+                        </header>
+                        <div class="Section-columnContent">
+                            <div class="NavigateProfile">
+                                <ul class="menu menu_vt">
+                                    <li class="menu-item"><a class="menu-link" href="{% url 'account:account' %}">{% translate 'Личный кабинет' %}</a>
+                                    </li>
+                                    <li class="menu-item"><a class="menu-link" href="{% url 'account:profile' %}">{% translate 'Профиль' %}</a>
+                                    </li>
+                                    <li class="menu-item"><a class="menu-link" href="{% url 'account:orders_history' %}">{% translate 'История заказов' %}</a>
+                                    </li>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="Section-content">
+                    <div class="Profile">
+                        <form class="form Profile-form" action="#" method="post">
+                            <div class="row">
+                                <div class="row-block">
+                                    <div class="form-group">
+                                        <label class="form-label" for="avatar">{% translate 'Аватар' %}
+                                        </label>
+                                        <div class="Profile-avatar">
+                                            <div class="Profile-img"><img src="assets/img/content/home/card.jpg" alt="card.jpg" />
+                                            </div>
+                                            <label class="Profile-fileLabel" for="avatar">{% translate 'Выберите аватар' %}
+                                            </label>
+                                            <input class="Profile-file form-input" id="avatar" name="avatar" type="file" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="name">{% translate 'ФИО' %}
+                                        </label>
+                                        <input class="form-input" id="name" name="name" type="text" value="Иванов Иван Иванович" />
+                                    </div>
+                                </div>
+                                <div class="row-block">
+                                    <div class="form-group">
+                                        <label class="form-label" for="phone">{% translate 'Телефон' %}
+                                        </label>
+                                        <input class="form-input" id="phone" name="phone" type="text" value="+70000000000" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="mail">{% translate 'E-mail' %}
+                                        </label>
+                                        <input class="form-input" id="mail" name="mail" type="text" value="send@test.test" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="password">{% translate 'Пароль' %}
+                                        </label>
+                                        <input class="form-input" id="password" name="password" type="password" placeholder="Тут можно изменить пароль" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="form-label" for="passwordReply">{% translate 'одтверждение пароля' %}
+                                        </label>
+                                        <input class="form-input" id="passwordReply" name="passwordReply" type="password" placeholder="Введите пароль повторно" />
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="Profile-btn">
+                                            <button class="btn btn_success">{% translate 'Сохранить' %}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends 'base_registr.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    <!--if lt IE 8
+  p.error-browser
+      | Ваш браузер&nbsp;
+      em устарел!&nbsp;
+      a(href="http://browsehappy.com/") Выберите новую версию
+          +s
+          | браузера здесь&nbsp;
+      | для правильного отображения сайта.
+  -->
+    <main class="Middle">
+        <div class="ControlPanel">
+            <div class="wrap">
+                <div class="row ControlPanel-row">
+                    <div class="row-block">
+                        <div class="row ControlPanel-rowSplit">
+                            <div class="row-block hide_700">
+                                <ul class="menu menu_img menu_smallImg ControlPanel-menu">
+                                    <li class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <img src="{% static 'assets/img/icons/socialHeader/tw.svg' %}"
+                                                 alt="tw.svg"/>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <img
+                                                    src="{% static 'assets/img/icons/socialHeader/in.svg' %}"
+                                                    alt="in.svg"/>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <img
+                                                    src="{% static 'assets/img/icons/socialHeader/pt.svg' %}"
+                                                    alt="pt.svg"/>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class="menu-link" href="#">
+                                            <img
+                                                    src="{% static 'assets/img/icons/socialHeader/mail.svg' %}"
+                                                    alt="mail.svg"/>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <nav class="row-block">
+                        <div class="row ControlPanel-rowSplit">
+                            <div class="row-block">
+                                <a class="ControlPanel-title" href="{% url 'account:login' %}">{% translate 'Вход' %}</a>
+                                <a class="ControlPanel-title" href="{% url 'account:register' %}">{% translate 'Регистрация' %}</a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <div class="wrap">
+            <div class="row Header-rowMain">
+                <div class="row-block Header-logo">
+                    <a class="logo" href="{% url 'core:index' %}">
+                        <img class="logo-image" src="{% static 'assets/img/logo.png' %}"
+                             alt="logo.png"/></a>
+                </div>
+            </div>
+            <div class="wrapper">
+                <div class="header">
+                    <h3 class="sign-in">{% translate 'Регистрация' %}</h3>
+                </div>
+                <div class="clear"></div>
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div>{{ field }}</div>
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="form-error">*{{ error }}</div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                    <input type="submit" value="Зарегистрироваться"/>
+                    <a class="registr" href="{% url 'account:login' %}">
+                        {% translate 'Вход' %}
+                    </a>
+                    <div class="clear"></div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+{% endblock %}

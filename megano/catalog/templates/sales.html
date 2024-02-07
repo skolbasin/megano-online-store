@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load static %}
+{% block content %}
+    <div class="Middle Middle_top">
+        <div class="Middle-top">
+            <div class="wrap">
+                <div class="Middle-header">
+
+                    <ul class="breadcrumbs Middle-breadcrumbs">
+                        <li class="breadcrumbs-item"><a href="/">{% translate 'Главная' %}</a>
+                        </li>
+                        <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% translate 'Скидки' %}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="Section">
+            <div class="wrap">
+                <div class="Cards Cards_blog">
+                    {% for sale in sales %}
+                        <div class="Card"><a class="Card-picture" href="{% url 'catalog:sales_detail' pk=sale.id %}">
+                            {% if sale.image %}
+                                <img src="{{ sale.image.url }}" alt="{{ sale.title }}" /></a>
+                            {% endif %}
+                            {% if sale.date_start %}
+                            <div class="Card-date">
+                                <strong class="Card-date-number">{{ sale.date_start|date:"d" }}
+                                </strong><span class="Card-date-month">{{ sale.date_start|date:"M" }}</span>
+                            </div>
+                            {% endif %}
+                            {% if sale.date_end %}
+                                <div class="Card-date Card-date_to">
+                                    <strong class="Card-date-number">{{ sale.date_end|date:"d" }}</strong>
+                                    <span class="Card-date-month">{{ sale.date_end|date:"M" }}</span>
+                                </div>
+                            {% endif %}
+                            <div class="Card-pin"></div>
+                            <div class="Card-content">
+                                <strong class="Card-title">
+                                    <a href="{% url 'catalog:sales_detail' pk=sale.id %}">
+                                        {{ sale.title }}
+                                    </a>
+                                </strong>
+                                <div class="Card-description">{{ sale.description }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="Pagination">
+        <div class="Pagination-ins">
+            <a class="Pagination-element Pagination-element_prev" href="#">
+                <img src="{% static 'assets/img/icons/prevPagination.svg' %}" alt="prevPagination.svg" />
+            </a>
+            <a class="Pagination-element Pagination-element_current" href="#">
+                <span class="Pagination-text">1</span>
+            </a>
+            <a class="Pagination-element" href="#">
+                <span class="Pagination-text">2</span>
+            </a>
+            <a class="Pagination-element" href="#">
+                <span class="Pagination-text">3</span>
+            </a>
+            <a class="Pagination-element Pagination-element_prev" href="#">
+                <img src="{% static 'assets/img/icons/nextPagination.svg' %}" alt="nextPagination.svg" />
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block content %}
+
+<div class="Middle Middle_top">
+    <div class="Middle-top">
+        <div class="wrap">
+            <div class="Middle-header">
+
+                <h1 class="Middle-title">
+                    {% if current_order.pay_result %}
+                    {% translate 'Ваш заказ оплачен!' %}
+                    {% else %}
+                    {% translate 'Ваш заказ не оплачен! Возникла ошибка' %}
+                    {% endif %}
+                </h1>
+                <ul class="breadcrumbs Middle-breadcrumbs">
+                    <li class="breadcrumbs-item"><a href="index.html">{% translate 'home' %}</a>
+                    </li>
+                    <li class="breadcrumbs-item breadcrumbs-item_current"><span>{% translate 'Оплата' %}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="wrap">
+            <a class="btn btn_success btn_lg" href="{% url 'order:order_detail' pk=current_order.pk %}">{% translate 'Вернуться к заказу' %}</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
