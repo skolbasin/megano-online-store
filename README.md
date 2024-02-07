@@ -5,7 +5,7 @@
 ## Установка
 
 
-1. Клонируйте репозиторий: `git clone https://gitlab.skillbox.ru/kurator_skillbox/python_django_team32.git`
+1. Клонируйте репозиторий: `git clone https://github.com/sergeykolbasin97/megano-online-store.git`
 2. Перейдите в каталог проекта: `cd megano`
 3. Установите зависимости: `pip install -r requirements.txt`
 
